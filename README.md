@@ -11,17 +11,23 @@ All commands can accept an optional '-debug' argument do show the equivalent
 ### Register a new User Account :heavy_check_mark:
 
 ```bash
-$ ./scripts/register-new-user.sh 'user-handle' 'password'
+$ ./scripts/register-new-user.sh [-debug] -handle 'user-handle' -password 'password'
+```
+
+### Get info about another user
+
+```bash
+$ ./scripts/get-user-info.sh [-debug] -user 'this-user-handle' -handle 'other-user-handle'
 ```
 
 ### Follow/Unfollow another user
 
 ```bash
-$ ./scripts/follow-user.sh 'this-user-handle' '@other-user'
+$ ./scripts/follow-user.sh 'this-user-handle' 'other-user-handle'
 ```
 
 ```bash
-$ ./scripts/unfollow-user.sh 'this-user-handle' '@other-user'
+$ ./scripts/unfollow-user.sh 'this-user-handle' 'other-user-handle'
 ```
 
 ### Post a Tweet
@@ -39,7 +45,7 @@ $ ./scripts/read-all-timeline.sh 'this-user-handle' [before-timestamp]
 ### Read Tweets chronologically from any individual user
 
 ```bash
-$ ./scripts/read-user-timeline.sh 'this-user-handle' '@other-user-handle' [before-timestamp]
+$ ./scripts/read-user-timeline.sh 'this-user-handle' 'other-user-handle' [before-timestamp]
 ```
 
 ### Update profile picture
@@ -72,9 +78,24 @@ export GOLEM_2024_HACKATHON_CLIENT_ID='golem-2024-hackathon-client-id'
 export GOLEM_2024_HACKATHON_CLIENT_SECRET='abc123!@#$%...xyz'
 
 export GOLEM_2024_HACKATHON_USER1_PASSWORD=hackathon-user-1-password
-export GOLEM_2024_HACKATHON_USER1_XID=
+export GOLEM_2024_HACKATHON_USER1_XID=...
 
 export GOLEM_2024_HACKATHON_USER2_PASSWORD=hackathon-user-2-password
-export GOLEM_2024_HACKATHON_USER2_XID=
+export GOLEM_2024_HACKATHON_USER2_XID=...
+
+export GOLEM_2024_HACKATHON_PUBLIC_KEY=$(cat <<EOF
+-----BEGIN PUBLIC KEY-----
+MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAvmzL/vAZcQ4+Rq9Bm2oR
 ...
+WcBCEtXZ/q34nRnREtfj8WMCAwEAAQ==
+-----END PUBLIC KEY-----
+EOF
+)
+
+export GOLEM_2024_HACKATHON_PRIVATE_KEY=$(cat <<EOF2
+-----BEGIN ENCRYPTED PRIVATE KEY-----
+...
+-----END ENCRYPTED PRIVATE KEY-----
+EOF2
+)
 ```
