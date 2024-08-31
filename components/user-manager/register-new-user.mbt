@@ -9,7 +9,7 @@ pub fn register_new_user(
   hmac_hash : String
 ) -> UserAuthResult {
   let hash_message = "\{user_handle}-\{user_password}-\{user_xid}-\{client_id}-\{timestamp_millis}"
-  match validate_hmac(hash_message, client_id, timestamp_millis) {
+  match validate_hmac(hash_message, client_id, timestamp_millis, hmac_hash) {
     Ok(_) => ()
     Err(s) => return Error(s)
   }
@@ -23,5 +23,10 @@ pub fn register_new_user(
     Ok(_) => return Error("user xid already exists")
     Err(_) => ()
   }
-  //
+  // add the handle to the lookup map
+  user_handle_to_xid.val.set(user_handle, user_xid)
+  // create the new user
+  all_users.val.set(user_xid, { base64_profile_jpg: "", user_handle, user_xid })
+  let user_jwt = "" // TODO
+  Success({ user_xid, user_jwt })
 }
