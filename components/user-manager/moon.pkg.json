@@ -23,6 +23,7 @@
     "gmlewis/spin-moonbit-sdk/common",
     "gmlewis/spin-moonbit-sdk/gen",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/environment",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock",
     "gmlewis/spin-moonbit-sdk/log",
     "gmlewis/spin-moonbit-sdk/util"
   ]
