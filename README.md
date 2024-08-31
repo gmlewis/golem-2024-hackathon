@@ -8,7 +8,7 @@ For details, see: https://www.golem.cloud/post/golem-1-0-hackathon-happens-on-au
 All commands can accept an optional '-debug' argument do show the equivalent
 `curl` command used to communicate with the Golem backend.
 
-### Register a new User Account
+### Register a new User Account :heavy_check_mark:
 
 ```bash
 $ ./scripts/register-new-user.sh 'user-handle' 'password'
