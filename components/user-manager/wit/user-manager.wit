@@ -1,0 +1,57 @@
+package golem:component;
+
+interface api {
+  // records
+  record user-auth-info {
+    user-xid: string,
+    user-jwt: string,
+  }
+
+  record user-info {
+    base64-profile-jpg: string,
+    user-xid: string,
+  }
+
+  // variants
+  variant get-user-info-result {
+    error(string),
+    success(user-info),
+  }
+
+  variant update-profile-picture-result {
+    error(string),
+    success(string),
+  }
+
+  variant user-auth-result {
+    error(string),
+    success(user-auth-info),
+  }
+
+  // JWT-protected endpoints
+  get-user-info: func(
+    user-handle: string,
+    jwt: string) -> get-user-info-result;
+
+  update-profile-picture: func(
+    base64-profile-jpg: string,
+    jwt: string) -> update-profile-picture-result;
+
+  // HMAC-protected endpoints
+  register-new-user: func(
+    user-handle: string,
+    user-password: string,
+    client-id: string,
+    hmac-hash: string) -> user-auth-result;
+
+  user-login: func(
+    user-handle: string,
+    user-password: string,
+    client-id: string,
+    hmac-hash: string) -> user-auth-result;
+}
+
+world user-manager {
+  import wasi:cli/stderr@0.2.0;
+  export api;
+}
