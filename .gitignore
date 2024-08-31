@@ -2,3 +2,6 @@ target/
 .mooncakes/
 .env*
 *.wat
+
+# handy sym links
+test-all.sh
