@@ -5,7 +5,7 @@
 // Usage:
 //
 //	source .env.development.local
-//	go run cmd/register-new-user/main.go ...
+//	go run cmd/register-new-user/main.go [-debug] -handle 'user-1' -password 'pass-1'
 package main
 
 import (
@@ -37,6 +37,13 @@ var (
 
 func main() {
 	flag.Parse()
+
+	if *userHandle == "" {
+		log.Fatalf("missing -handle 'user-handle' flag")
+	}
+	if *userPassword == "" {
+		log.Fatalf("missing -password 'user-password' flag")
+	}
 
 	baseURL := common.MustGetenv(baseURLEnvVar)
 	clientID := common.MustGetenv(clientIDEnvVar)
