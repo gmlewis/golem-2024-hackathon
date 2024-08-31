@@ -4,7 +4,7 @@ pub fn wasmExportGetUserInfo(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
   let result1 : GetUserInfoResult = get_user_info(result, result0)
-  let return_area = @ffi.malloc(20)
+  let return_area = @ffi.malloc(28)
   match result1 {
     Error(payload) => {
       @ffi.store8(return_area + 0, 0)
@@ -16,8 +16,10 @@ pub fn wasmExportGetUserInfo(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
       @ffi.store8(return_area + 0, 1)
       @ffi.store32(return_area + 8, payload4.base64_profile_jpg.iter().count())
       @ffi.store32(return_area + 4, @ffi.str2ptr(payload4.base64_profile_jpg))
-      @ffi.store32(return_area + 16, payload4.user_xid.iter().count())
-      @ffi.store32(return_area + 12, @ffi.str2ptr(payload4.user_xid))
+      @ffi.store32(return_area + 16, payload4.user_handle.iter().count())
+      @ffi.store32(return_area + 12, @ffi.str2ptr(payload4.user_handle))
+      @ffi.store32(return_area + 24, payload4.user_xid.iter().count())
+      @ffi.store32(return_area + 20, @ffi.str2ptr(payload4.user_xid))
       ()
     }
     _ => panic()
@@ -32,6 +34,7 @@ pub fn wasmExportGetUserInfoPostReturn(p0 : Int) -> Unit {
     1 => {
       @ffi.free(@ffi.load32(p0 + 4))
       @ffi.free(@ffi.load32(p0 + 12))
+      @ffi.free(@ffi.load32(p0 + 20))
     }
   }
 }

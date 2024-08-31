@@ -7,6 +7,7 @@ pub struct UserAuthInfo {
 
 pub struct UserInfo {
   base64_profile_jpg : String
+  user_handle : String
   user_xid : String
 } derive(Show, Eq)
 

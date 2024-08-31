@@ -42,6 +42,7 @@ interface api {
   register-new-user: func(
     user-handle: string,
     user-password: string,
+    user-xid: string,
     client-id: string,
     timestamp-millis: u64,
     hmac-hash: string) -> user-auth-result;
