@@ -66,6 +66,8 @@ The following env vars need to be set up in this file:
 
 ```bash
 export GOLEM_2024_HACKATHON_BASE_URL=https://your-golem-endpoint-base-url
+export GOLEM_2024_HACKATHON_PROJECT_NAME="<username>-golem-2024-hackathon"
+export GOLEM_2024_HACKATHON_PROJECT_ID='0123-789'
 export GOLEM_2024_HACKATHON_CLIENT_ID='golem-2024-hackathon-client-id'
 export GOLEM_2024_HACKATHON_CLIENT_SECRET='abc123!@#$%...xyz'
 
