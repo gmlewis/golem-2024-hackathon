@@ -81,15 +81,20 @@ pub fn wasmExportRegisterNewUser(
   p3 : Int,
   p4 : Int,
   p5 : Int,
-  p6 : Int,
-  p7 : Int
+  p6 : Int64,
+  p7 : Int,
+  p8 : Int
 ) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
   let result1 = @ffi.ptr2str(p4)
-  let result2 = @ffi.ptr2str(p6)
+  let result2 = @ffi.ptr2str(p7)
   let result3 : UserAuthResult = register_new_user(
-    result, result0, result1, result2,
+    result,
+    result0,
+    result1,
+    p6.to_uint64(),
+    result2,
   )
   let return_area = @ffi.malloc(20)
   match result3 {
@@ -130,14 +135,21 @@ pub fn wasmExportUserLogin(
   p3 : Int,
   p4 : Int,
   p5 : Int,
-  p6 : Int,
-  p7 : Int
+  p6 : Int64,
+  p7 : Int,
+  p8 : Int
 ) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
   let result1 = @ffi.ptr2str(p4)
-  let result2 = @ffi.ptr2str(p6)
-  let result3 : UserAuthResult = user_login(result, result0, result1, result2)
+  let result2 = @ffi.ptr2str(p7)
+  let result3 : UserAuthResult = user_login(
+    result,
+    result0,
+    result1,
+    p6.to_uint64(),
+    result2,
+  )
   let return_area = @ffi.malloc(20)
   match result3 {
     Error(payload) => {

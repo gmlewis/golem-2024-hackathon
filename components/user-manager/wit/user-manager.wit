@@ -9,6 +9,7 @@ interface api {
 
   record user-info {
     base64-profile-jpg: string,
+    user-handle: string,
     user-xid: string,
   }
 
@@ -42,12 +43,14 @@ interface api {
     user-handle: string,
     user-password: string,
     client-id: string,
+    timestamp-millis: u64,
     hmac-hash: string) -> user-auth-result;
 
   user-login: func(
     user-handle: string,
     user-password: string,
     client-id: string,
+    timestamp-millis: u64,
     hmac-hash: string) -> user-auth-result;
 }
 
