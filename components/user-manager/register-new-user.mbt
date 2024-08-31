@@ -15,12 +15,20 @@ pub fn register_new_user(
   }
   //
   match lookup_user_by_handle(user_handle) {
-    Ok(_) => return Error("user handle already exists")
+    Ok(_) => {
+      @log.error(
+        "register_new_user: user handle '\{user_handle}' already exists",
+      )
+      return Error("user handle already exists")
+    }
     Err(_) => ()
   }
   //
   match lookup_user_by_xid(user_xid) {
-    Ok(_) => return Error("user xid already exists")
+    Ok(_) => {
+      @log.error("register_new_user: user xid '\{user_xid}' already exists")
+      return Error("user xid already exists")
+    }
     Err(_) => ()
   }
   // add the handle to the lookup map
@@ -28,5 +36,8 @@ pub fn register_new_user(
   // create the new user
   all_users.val.set(user_xid, { base64_profile_jpg: "", user_handle, user_xid })
   let user_jwt = "" // TODO
+  @log.info(
+    "register_new_user: successfully created new user: handle='\{user_handle}', xid='\{user_xid}'",
+  )
   Success({ user_xid, user_jwt })
 }

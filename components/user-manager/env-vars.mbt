@@ -16,6 +16,7 @@ fn get_env_var(var_name : String) -> String!EnvVarError {
     Some(value) => if value != "" { return value }
     _ => ()
   }
+  @log.error("env var '\{var_name}' not found")
   raise EnvVarError("env var '\{var_name}' not found")
 }
 
