@@ -1,3 +1,9 @@
+/// `all_follows` is a map of user XIDs that this user is following.
+/// Each key is the user XID and the value is currently unused.
+/// This naturally de-dupes the user XIDs.
+let all_follows : Ref[Map[String, String]] = { val: {  } }
+
 pub fn following(jwt : String) -> FollowingResult {
-  abort("todo")
+  let user_xids = all_follows.val.keys().collect()
+  { user_xids, }
 }

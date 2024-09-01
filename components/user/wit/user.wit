@@ -41,6 +41,7 @@ interface api {
 
   post-tweet: func(
     tweet-contents: string,
+    tweet-xid: string,
     jwt: string) -> success-or-failure-result;
 
   get-tweet: func(
