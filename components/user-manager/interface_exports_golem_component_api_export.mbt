@@ -1019,7 +1019,7 @@ pub fn wasmExportMethodApiBlockingFollowingPostReturn(p0 : Int) -> Unit {
 
 pub fn wasmExportMethodApiFollowing(p0 : Int, p1 : Int, p2 : Int) -> Int {
   let result = @ffi.ptr2str(p1)
-  let result0 : FutureFollowingResult = Api::following(Api::Api(p0), result)
+  let result0 : FutureFollowingResult = Api::rpc_following(Api::Api(p0), result)
   return result0.0
 }
 
@@ -1080,7 +1080,7 @@ pub fn wasmExportMethodApiFollowUser(
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
   let result1 = @ffi.ptr2str(p5)
-  let result2 : FutureFollowUserResult = Api::follow_user(
+  let result2 : FutureFollowUserResult = Api::rpc_follow_user(
     Api::Api(p0),
     result,
     result0,
@@ -1139,7 +1139,7 @@ pub fn wasmExportMethodApiUnfollowUser(
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
-  let result1 : FutureUnfollowUserResult = Api::unfollow_user(
+  let result1 : FutureUnfollowUserResult = Api::rpc_unfollow_user(
     Api::Api(p0),
     result,
     result0,
@@ -1204,7 +1204,7 @@ pub fn wasmExportMethodApiPostTweet(
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
   let result1 = @ffi.ptr2str(p5)
-  let result2 : FuturePostTweetResult = Api::post_tweet(
+  let result2 : FuturePostTweetResult = Api::rpc_post_tweet(
     Api::Api(p0),
     result,
     result0,
@@ -1263,7 +1263,7 @@ pub fn wasmExportMethodApiGetTweet(
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
-  let result1 : FutureGetTweetResult = Api::get_tweet(
+  let result1 : FutureGetTweetResult = Api::rpc_get_tweet(
     Api::Api(p0),
     result,
     result0,
@@ -1345,7 +1345,7 @@ pub fn wasmExportMethodApiListAllFollowedTweets(
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p4)
-  let result1 : FutureListAllFollowedTweetsResult = Api::list_all_followed_tweets(
+  let result1 : FutureListAllFollowedTweetsResult = Api::rpc_list_all_followed_tweets(
     Api::Api(p0),
     result,
     p3.to_uint(),
@@ -1426,7 +1426,7 @@ pub fn wasmExportMethodApiListUserTweets(
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p4)
-  let result1 : FutureListUserTweetsResult = Api::list_user_tweets(
+  let result1 : FutureListUserTweetsResult = Api::rpc_list_user_tweets(
     Api::Api(p0),
     result,
     p3.to_uint(),
