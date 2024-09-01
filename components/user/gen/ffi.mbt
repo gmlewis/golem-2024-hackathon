@@ -21,3 +21,5 @@ dst_size : Int
       dst
 }
 
+let return_area : Int = @ffi.malloc(12)
+
