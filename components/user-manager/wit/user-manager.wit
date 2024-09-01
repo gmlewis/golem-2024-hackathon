@@ -18,11 +18,6 @@ interface api {
     user-xids: list<string>,
   }
 
-  record following-result {
-    error(string),
-    success(list-following),
-  }
-
   record tweet {
     user-xid: string,
     tweet-contents: string,
@@ -34,6 +29,11 @@ interface api {
   }
 
   // variants
+  variant following-result {
+    error(string),
+    success(list-following),
+  }
+
   variant get-user-info-result {
     error(string),
     success(user-info),
