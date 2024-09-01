@@ -119,10 +119,15 @@ pub fn wasmExportUpdateProfilePicturePostReturn(p0 : Int) -> Unit {
   }
 }
 
-pub fn wasmExportFollowing(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
+pub fn wasmExportForwardedFollowing(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int
+) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
-  let result1 : FollowingResult = following(result, result0)
+  let result1 : FollowingResult = forwarded_following(result, result0)
   let return_area = @ffi.malloc(12)
   match result1 {
     Error(payload) => {
@@ -150,7 +155,7 @@ pub fn wasmExportFollowing(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
   return return_area
 }
 
-pub fn wasmExportFollowingPostReturn(p0 : Int) -> Unit {
+pub fn wasmExportForwardedFollowingPostReturn(p0 : Int) -> Unit {
   match @ffi.load8_u(p0 + 0) {
     0 => @ffi.free(@ffi.load32(p0 + 4))
     1 => {
@@ -163,10 +168,15 @@ pub fn wasmExportFollowingPostReturn(p0 : Int) -> Unit {
   }
 }
 
-pub fn wasmExportFollowUser(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
+pub fn wasmExportForwardedFollowUser(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int
+) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
-  let result1 : SuccessOrFailureResult = follow_user(result, result0)
+  let result1 : SuccessOrFailureResult = forwarded_follow_user(result, result0)
   let return_area = @ffi.malloc(12)
   match result1 {
     Error(payload) => {
@@ -187,17 +197,24 @@ pub fn wasmExportFollowUser(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
   return return_area
 }
 
-pub fn wasmExportFollowUserPostReturn(p0 : Int) -> Unit {
+pub fn wasmExportForwardedFollowUserPostReturn(p0 : Int) -> Unit {
   match @ffi.load8_u(p0 + 0) {
     0 => @ffi.free(@ffi.load32(p0 + 4))
     1 => @ffi.free(@ffi.load32(p0 + 4))
   }
 }
 
-pub fn wasmExportUnfollowUser(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
+pub fn wasmExportForwardedUnfollowUser(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int
+) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
-  let result1 : SuccessOrFailureResult = unfollow_user(result, result0)
+  let result1 : SuccessOrFailureResult = forwarded_unfollow_user(
+    result, result0,
+  )
   let return_area = @ffi.malloc(12)
   match result1 {
     Error(payload) => {
@@ -218,14 +235,14 @@ pub fn wasmExportUnfollowUser(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
   return return_area
 }
 
-pub fn wasmExportUnfollowUserPostReturn(p0 : Int) -> Unit {
+pub fn wasmExportForwardedUnfollowUserPostReturn(p0 : Int) -> Unit {
   match @ffi.load8_u(p0 + 0) {
     0 => @ffi.free(@ffi.load32(p0 + 4))
     1 => @ffi.free(@ffi.load32(p0 + 4))
   }
 }
 
-pub fn wasmExportPostTweet(
+pub fn wasmExportForwardedPostTweet(
   p0 : Int,
   p1 : Int,
   p2 : Int,
@@ -236,7 +253,9 @@ pub fn wasmExportPostTweet(
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
   let result1 = @ffi.ptr2str(p4)
-  let result2 : SuccessOrFailureResult = post_tweet(result, result0, result1)
+  let result2 : SuccessOrFailureResult = forwarded_post_tweet(
+    result, result0, result1,
+  )
   let return_area = @ffi.malloc(12)
   match result2 {
     Error(payload) => {
@@ -257,14 +276,14 @@ pub fn wasmExportPostTweet(
   return return_area
 }
 
-pub fn wasmExportPostTweetPostReturn(p0 : Int) -> Unit {
+pub fn wasmExportForwardedPostTweetPostReturn(p0 : Int) -> Unit {
   match @ffi.load8_u(p0 + 0) {
     0 => @ffi.free(@ffi.load32(p0 + 4))
     1 => @ffi.free(@ffi.load32(p0 + 4))
   }
 }
 
-pub fn wasmExportGetTweet(
+pub fn wasmExportForwardedGetTweet(
   p0 : Int,
   p1 : Int,
   p2 : Int,
@@ -275,7 +294,9 @@ pub fn wasmExportGetTweet(
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
   let result1 = @ffi.ptr2str(p4)
-  let result2 : SuccessOrFailureResult = get_tweet(result, result0, result1)
+  let result2 : SuccessOrFailureResult = forwarded_get_tweet(
+    result, result0, result1,
+  )
   let return_area = @ffi.malloc(12)
   match result2 {
     Error(payload) => {
@@ -296,14 +317,14 @@ pub fn wasmExportGetTweet(
   return return_area
 }
 
-pub fn wasmExportGetTweetPostReturn(p0 : Int) -> Unit {
+pub fn wasmExportForwardedGetTweetPostReturn(p0 : Int) -> Unit {
   match @ffi.load8_u(p0 + 0) {
     0 => @ffi.free(@ffi.load32(p0 + 4))
     1 => @ffi.free(@ffi.load32(p0 + 4))
   }
 }
 
-pub fn wasmExportListAllFollowedTweets(
+pub fn wasmExportForwardedListAllFollowedTweets(
   p0 : Int,
   p1 : Int,
   p2 : Int,
@@ -315,7 +336,7 @@ pub fn wasmExportListAllFollowedTweets(
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
   let result1 = @ffi.ptr2str(p5)
-  let result2 : ListTweetsResult = list_all_followed_tweets(
+  let result2 : ListTweetsResult = forwarded_list_all_followed_tweets(
     result,
     result0,
     p4.to_uint(),
@@ -352,7 +373,7 @@ pub fn wasmExportListAllFollowedTweets(
   return return_area
 }
 
-pub fn wasmExportListAllFollowedTweetsPostReturn(p0 : Int) -> Unit {
+pub fn wasmExportForwardedListAllFollowedTweetsPostReturn(p0 : Int) -> Unit {
   match @ffi.load8_u(p0 + 0) {
     0 => @ffi.free(@ffi.load32(p0 + 4))
     1 => {
@@ -367,7 +388,7 @@ pub fn wasmExportListAllFollowedTweetsPostReturn(p0 : Int) -> Unit {
   }
 }
 
-pub fn wasmExportListUserTweets(
+pub fn wasmExportForwardedListUserTweets(
   p0 : Int,
   p1 : Int,
   p2 : Int,
@@ -379,7 +400,7 @@ pub fn wasmExportListUserTweets(
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
   let result1 = @ffi.ptr2str(p5)
-  let result2 : ListTweetsResult = list_user_tweets(
+  let result2 : ListTweetsResult = forwarded_list_user_tweets(
     result,
     result0,
     p4.to_uint(),
@@ -416,7 +437,7 @@ pub fn wasmExportListUserTweets(
   return return_area
 }
 
-pub fn wasmExportListUserTweetsPostReturn(p0 : Int) -> Unit {
+pub fn wasmExportForwardedListUserTweetsPostReturn(p0 : Int) -> Unit {
   match @ffi.load8_u(p0 + 0) {
     0 => @ffi.free(@ffi.load32(p0 + 4))
     1 => {
@@ -1019,7 +1040,7 @@ pub fn wasmExportMethodApiBlockingFollowingPostReturn(p0 : Int) -> Unit {
 
 pub fn wasmExportMethodApiFollowing(p0 : Int, p1 : Int, p2 : Int) -> Int {
   let result = @ffi.ptr2str(p1)
-  let result0 : FutureFollowingResult = Api::rpc_following(Api::Api(p0), result)
+  let result0 : FutureFollowingResult = Api::following(Api::Api(p0), result)
   return result0.0
 }
 
@@ -1080,7 +1101,7 @@ pub fn wasmExportMethodApiFollowUser(
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
   let result1 = @ffi.ptr2str(p5)
-  let result2 : FutureFollowUserResult = Api::rpc_follow_user(
+  let result2 : FutureFollowUserResult = Api::follow_user(
     Api::Api(p0),
     result,
     result0,
@@ -1139,7 +1160,7 @@ pub fn wasmExportMethodApiUnfollowUser(
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
-  let result1 : FutureUnfollowUserResult = Api::rpc_unfollow_user(
+  let result1 : FutureUnfollowUserResult = Api::unfollow_user(
     Api::Api(p0),
     result,
     result0,
@@ -1204,7 +1225,7 @@ pub fn wasmExportMethodApiPostTweet(
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
   let result1 = @ffi.ptr2str(p5)
-  let result2 : FuturePostTweetResult = Api::rpc_post_tweet(
+  let result2 : FuturePostTweetResult = Api::post_tweet(
     Api::Api(p0),
     result,
     result0,
@@ -1263,7 +1284,7 @@ pub fn wasmExportMethodApiGetTweet(
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
-  let result1 : FutureGetTweetResult = Api::rpc_get_tweet(
+  let result1 : FutureGetTweetResult = Api::get_tweet(
     Api::Api(p0),
     result,
     result0,
@@ -1345,7 +1366,7 @@ pub fn wasmExportMethodApiListAllFollowedTweets(
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p4)
-  let result1 : FutureListAllFollowedTweetsResult = Api::rpc_list_all_followed_tweets(
+  let result1 : FutureListAllFollowedTweetsResult = Api::list_all_followed_tweets(
     Api::Api(p0),
     result,
     p3.to_uint(),
@@ -1426,7 +1447,7 @@ pub fn wasmExportMethodApiListUserTweets(
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p4)
-  let result1 : FutureListUserTweetsResult = Api::rpc_list_user_tweets(
+  let result1 : FutureListUserTweetsResult = Api::list_user_tweets(
     Api::Api(p0),
     result,
     p3.to_uint(),

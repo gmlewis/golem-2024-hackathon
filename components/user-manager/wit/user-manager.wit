@@ -67,35 +67,35 @@ interface api {
     jwt: string) -> success-or-failure-result;
 
   // JWT-protected endpoints that are forwarded to individual `user` workers
-  following: func(
+  forwarded-following: func(
     user-xid: string,
     jwt: string) -> following-result;
 
-  follow-user: func(
+  forwarded-follow-user: func(
     other-user-xid: string,
     jwt: string) -> success-or-failure-result;
 
-  unfollow-user: func(
+  forwarded-unfollow-user: func(
     other-user-xid: string,
     jwt: string) -> success-or-failure-result;
 
-  post-tweet: func(
+  forwarded-post-tweet: func(
     tweet-contents: string,
     tweet-xid: string,
     jwt: string) -> success-or-failure-result;
 
-  get-tweet: func(
+  forwarded-get-tweet: func(
     user-xid: string,
     tweet-xid: string,
     jwt: string) -> success-or-failure-result;
 
-  list-all-followed-tweets: func(
+  forwarded-list-all-followed-tweets: func(
     user-xid: string,
     before: string,
     limit: u32,
     jwt: string) -> list-tweets-result;
 
-  list-user-tweets: func(
+  forwarded-list-user-tweets: func(
     user-xid: string,
     before: string,
     limit: u32,

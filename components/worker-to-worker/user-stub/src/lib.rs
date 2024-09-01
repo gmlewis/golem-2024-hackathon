@@ -471,14 +471,10 @@ for Api {
     }
     fn blocking_following(
         &self,
-        jwt: String,
     ) -> crate::bindings::golem::component::api::FollowingResult {
         let result = self
             .rpc
-            .invoke_and_await(
-                "golem:component/api.{following}",
-                &[WitValue::builder().string(&jwt)],
-            )
+            .invoke_and_await("golem:component/api.{following}", &[])
             .expect(
                 &format!(
                     "Failed to invoke-and-await remote {}",
@@ -521,14 +517,10 @@ for Api {
     }
     fn following(
         &self,
-        jwt: String,
     ) -> crate::bindings::exports::golem::component_stub::stub_user_manager::FutureFollowingResult {
         let result = self
             .rpc
-            .async_invoke_and_await(
-                "golem:component/api.{following}",
-                &[WitValue::builder().string(&jwt)],
-            );
+            .async_invoke_and_await("golem:component/api.{following}", &[]);
         crate::bindings::exports::golem::component_stub::stub_user_manager::FutureFollowingResult::new(FutureFollowingResult {
             future_invoke_result: result,
         })
@@ -537,7 +529,6 @@ for Api {
         &self,
         other_user_xid: String,
         other_user_worker: String,
-        jwt: String,
     ) -> crate::bindings::golem::component::api::SuccessOrFailureResult {
         let result = self
             .rpc
@@ -546,7 +537,6 @@ for Api {
                 &[
                     WitValue::builder().string(&other_user_xid),
                     WitValue::builder().string(&other_user_worker),
-                    WitValue::builder().string(&jwt),
                 ],
             )
             .expect(
@@ -588,7 +578,6 @@ for Api {
         &self,
         other_user_xid: String,
         other_user_worker: String,
-        jwt: String,
     ) -> crate::bindings::exports::golem::component_stub::stub_user_manager::FutureFollowUserResult {
         let result = self
             .rpc
@@ -597,7 +586,6 @@ for Api {
                 &[
                     WitValue::builder().string(&other_user_xid),
                     WitValue::builder().string(&other_user_worker),
-                    WitValue::builder().string(&jwt),
                 ],
             );
         crate::bindings::exports::golem::component_stub::stub_user_manager::FutureFollowUserResult::new(FutureFollowUserResult {
@@ -607,16 +595,12 @@ for Api {
     fn blocking_unfollow_user(
         &self,
         other_user_xid: String,
-        jwt: String,
     ) -> crate::bindings::golem::component::api::SuccessOrFailureResult {
         let result = self
             .rpc
             .invoke_and_await(
                 "golem:component/api.{unfollow-user}",
-                &[
-                    WitValue::builder().string(&other_user_xid),
-                    WitValue::builder().string(&jwt),
-                ],
+                &[WitValue::builder().string(&other_user_xid)],
             )
             .expect(
                 &format!(
@@ -656,16 +640,12 @@ for Api {
     fn unfollow_user(
         &self,
         other_user_xid: String,
-        jwt: String,
     ) -> crate::bindings::exports::golem::component_stub::stub_user_manager::FutureUnfollowUserResult {
         let result = self
             .rpc
             .async_invoke_and_await(
                 "golem:component/api.{unfollow-user}",
-                &[
-                    WitValue::builder().string(&other_user_xid),
-                    WitValue::builder().string(&jwt),
-                ],
+                &[WitValue::builder().string(&other_user_xid)],
             );
         crate::bindings::exports::golem::component_stub::stub_user_manager::FutureUnfollowUserResult::new(FutureUnfollowUserResult {
             future_invoke_result: result,
@@ -675,7 +655,6 @@ for Api {
         &self,
         tweet_contents: String,
         tweet_xid: String,
-        jwt: String,
     ) -> crate::bindings::golem::component::api::SuccessOrFailureResult {
         let result = self
             .rpc
@@ -684,7 +663,6 @@ for Api {
                 &[
                     WitValue::builder().string(&tweet_contents),
                     WitValue::builder().string(&tweet_xid),
-                    WitValue::builder().string(&jwt),
                 ],
             )
             .expect(
@@ -726,7 +704,6 @@ for Api {
         &self,
         tweet_contents: String,
         tweet_xid: String,
-        jwt: String,
     ) -> crate::bindings::exports::golem::component_stub::stub_user_manager::FuturePostTweetResult {
         let result = self
             .rpc
@@ -735,7 +712,6 @@ for Api {
                 &[
                     WitValue::builder().string(&tweet_contents),
                     WitValue::builder().string(&tweet_xid),
-                    WitValue::builder().string(&jwt),
                 ],
             );
         crate::bindings::exports::golem::component_stub::stub_user_manager::FuturePostTweetResult::new(FuturePostTweetResult {
@@ -745,16 +721,12 @@ for Api {
     fn blocking_get_tweet(
         &self,
         tweet_xid: String,
-        jwt: String,
     ) -> crate::bindings::golem::component::api::SuccessOrFailureResult {
         let result = self
             .rpc
             .invoke_and_await(
                 "golem:component/api.{get-tweet}",
-                &[
-                    WitValue::builder().string(&tweet_xid),
-                    WitValue::builder().string(&jwt),
-                ],
+                &[WitValue::builder().string(&tweet_xid)],
             )
             .expect(
                 &format!(
@@ -794,16 +766,12 @@ for Api {
     fn get_tweet(
         &self,
         tweet_xid: String,
-        jwt: String,
     ) -> crate::bindings::exports::golem::component_stub::stub_user_manager::FutureGetTweetResult {
         let result = self
             .rpc
             .async_invoke_and_await(
                 "golem:component/api.{get-tweet}",
-                &[
-                    WitValue::builder().string(&tweet_xid),
-                    WitValue::builder().string(&jwt),
-                ],
+                &[WitValue::builder().string(&tweet_xid)],
             );
         crate::bindings::exports::golem::component_stub::stub_user_manager::FutureGetTweetResult::new(FutureGetTweetResult {
             future_invoke_result: result,
@@ -813,17 +781,12 @@ for Api {
         &self,
         before: String,
         limit: u32,
-        jwt: String,
     ) -> crate::bindings::golem::component::api::ListTweetsResult {
         let result = self
             .rpc
             .invoke_and_await(
                 "golem:component/api.{list-all-followed-tweets}",
-                &[
-                    WitValue::builder().string(&before),
-                    WitValue::builder().u32(limit),
-                    WitValue::builder().string(&jwt),
-                ],
+                &[WitValue::builder().string(&before), WitValue::builder().u32(limit)],
             )
             .expect(
                 &format!(
@@ -889,17 +852,12 @@ for Api {
         &self,
         before: String,
         limit: u32,
-        jwt: String,
     ) -> crate::bindings::exports::golem::component_stub::stub_user_manager::FutureListAllFollowedTweetsResult {
         let result = self
             .rpc
             .async_invoke_and_await(
                 "golem:component/api.{list-all-followed-tweets}",
-                &[
-                    WitValue::builder().string(&before),
-                    WitValue::builder().u32(limit),
-                    WitValue::builder().string(&jwt),
-                ],
+                &[WitValue::builder().string(&before), WitValue::builder().u32(limit)],
             );
         crate::bindings::exports::golem::component_stub::stub_user_manager::FutureListAllFollowedTweetsResult::new(FutureListAllFollowedTweetsResult {
             future_invoke_result: result,
@@ -907,18 +865,18 @@ for Api {
     }
     fn blocking_list_user_tweets(
         &self,
+        user_xid: String,
         before: String,
         limit: u32,
-        jwt: String,
     ) -> crate::bindings::golem::component::api::ListTweetsResult {
         let result = self
             .rpc
             .invoke_and_await(
                 "golem:component/api.{list-user-tweets}",
                 &[
+                    WitValue::builder().string(&user_xid),
                     WitValue::builder().string(&before),
                     WitValue::builder().u32(limit),
-                    WitValue::builder().string(&jwt),
                 ],
             )
             .expect(
@@ -983,18 +941,18 @@ for Api {
     }
     fn list_user_tweets(
         &self,
+        user_xid: String,
         before: String,
         limit: u32,
-        jwt: String,
     ) -> crate::bindings::exports::golem::component_stub::stub_user_manager::FutureListUserTweetsResult {
         let result = self
             .rpc
             .async_invoke_and_await(
                 "golem:component/api.{list-user-tweets}",
                 &[
+                    WitValue::builder().string(&user_xid),
                     WitValue::builder().string(&before),
                     WitValue::builder().u32(limit),
-                    WitValue::builder().string(&jwt),
                 ],
             );
         crate::bindings::exports::golem::component_stub::stub_user_manager::FutureListUserTweetsResult::new(FutureListUserTweetsResult {

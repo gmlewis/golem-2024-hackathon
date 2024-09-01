@@ -7,8 +7,7 @@ let all_tweets : Ref[Map[String, String]] = { val: {  } }
 
 pub fn post_tweet(
   tweet_contents : String,
-  tweet_xid : String,
-  jwt : String
+  tweet_xid : String
 ) -> SuccessOrFailureResult {
   all_tweets.val.set(tweet_xid, tweet_contents)
   Success("tweet posted")

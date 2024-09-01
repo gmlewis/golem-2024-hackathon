@@ -1,10 +1,9 @@
 pub fn list_user_tweets(
+  user_xid : String,
   before : String,
-  limit : UInt,
-  jwt : String
+  limit : UInt
 ) -> ListTweetsResult {
   let limit = limit.to_int()
-  let user_xid = jwt // TODO: temporary hack until JWTs work
   let tweets : Array[Tweet] = Array::new(capacity=limit)
   for pair in all_tweets.val.iter() {
     let tweet_xid = pair.0

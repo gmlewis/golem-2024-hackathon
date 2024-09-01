@@ -32,37 +32,30 @@ interface api {
     success(string),
   }
 
-  // JWT-protected endpoints
-  following: func(
-    jwt: string) -> following-result;
+  following: func() -> following-result;
 
   follow-user: func(
     other-user-xid: string,
-    other-user-worker: string,
-    jwt: string) -> success-or-failure-result;
+    other-user-worker: string) -> success-or-failure-result;
 
   unfollow-user: func(
-    other-user-xid: string,
-    jwt: string) -> success-or-failure-result;
+    other-user-xid: string) -> success-or-failure-result;
 
   post-tweet: func(
     tweet-contents: string,
-    tweet-xid: string,
-    jwt: string) -> success-or-failure-result;
+    tweet-xid: string) -> success-or-failure-result;
 
   get-tweet: func(
-    tweet-xid: string,
-    jwt: string) -> success-or-failure-result;
+    tweet-xid: string) -> success-or-failure-result;
 
   list-all-followed-tweets: func(
     before: string,
-    limit: u32,
-    jwt: string) -> list-tweets-result;
+    limit: u32) -> list-tweets-result;
 
   list-user-tweets: func(
+    user-xid: string,
     before: string,
-    limit: u32,
-    jwt: string) -> list-tweets-result;
+    limit: u32) -> list-tweets-result;
 }
 
 world user-manager {

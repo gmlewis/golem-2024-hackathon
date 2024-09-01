@@ -3,7 +3,7 @@
 /// This naturally de-dupes the user XIDs.
 let all_follows : Ref[Map[String, String]] = { val: {  } }
 
-pub fn following(jwt : String) -> FollowingResult {
+pub fn following() -> FollowingResult {
   let user_xids = all_follows.val.keys().collect()
   Success({ user_xids, })
 }

@@ -100,7 +100,7 @@ pub fn Api::blocking_following(self : Api, jwt : String) -> FollowingResult {
   abort("todo")
 }
 
-pub fn Api::rpc_following(self : Api, jwt : String) -> FutureFollowingResult {
+pub fn Api::following(self : Api, jwt : String) -> FutureFollowingResult {
   abort("todo")
 }
 
@@ -113,7 +113,7 @@ pub fn Api::blocking_follow_user(
   abort("todo")
 }
 
-pub fn Api::rpc_follow_user(
+pub fn Api::follow_user(
   self : Api,
   other_user_xid : String,
   other_user_worker : String,
@@ -130,7 +130,7 @@ pub fn Api::blocking_unfollow_user(
   abort("todo")
 }
 
-pub fn Api::rpc_unfollow_user(
+pub fn Api::unfollow_user(
   self : Api,
   other_user_xid : String,
   jwt : String
@@ -147,7 +147,7 @@ pub fn Api::blocking_post_tweet(
   abort("todo")
 }
 
-pub fn Api::rpc_post_tweet(
+pub fn Api::post_tweet(
   self : Api,
   tweet_contents : String,
   tweet_xid : String,
@@ -164,7 +164,7 @@ pub fn Api::blocking_get_tweet(
   abort("todo")
 }
 
-pub fn Api::rpc_get_tweet(
+pub fn Api::get_tweet(
   self : Api,
   tweet_xid : String,
   jwt : String
@@ -181,7 +181,7 @@ pub fn Api::blocking_list_all_followed_tweets(
   abort("todo")
 }
 
-pub fn Api::rpc_list_all_followed_tweets(
+pub fn Api::list_all_followed_tweets(
   self : Api,
   before : String,
   limit : UInt,
@@ -199,7 +199,7 @@ pub fn Api::blocking_list_user_tweets(
   abort("todo")
 }
 
-pub fn Api::rpc_list_user_tweets(
+pub fn Api::list_user_tweets(
   self : Api,
   before : String,
   limit : UInt,

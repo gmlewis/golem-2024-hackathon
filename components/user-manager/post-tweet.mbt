@@ -14,13 +14,6 @@ pub fn post_tweet(
     _ => return Error("user \{user_xid} not found")
   }
   //
-  let worker_urn = user.worker_urn
-  let uri : @types.Uri = { value: worker_urn }
-  let rpc = @types.WasmRpc::wasm_rpc(uri)
-  let function_params : Array[@types.WitValue] = [{ nodes: [] }]
-  let wit_value = match rpc.invoke_and_await("post_tweet", function_params) {
-    Ok(wit_value) => wit_value
-    Err(e) => return Error(e.to_string())
-  }
+
   Success("yo")
 }

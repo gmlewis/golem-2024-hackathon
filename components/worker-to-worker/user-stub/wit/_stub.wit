@@ -40,20 +40,20 @@ interface stub-user-manager {
   }
   resource api {
     constructor(location: golem-rpc-uri);
-    blocking-following: func(jwt: string) -> following-result;
-    following: func(jwt: string) -> future-following-result;
-    blocking-follow-user: func(other-user-xid: string, other-user-worker: string, jwt: string) -> success-or-failure-result;
-    follow-user: func(other-user-xid: string, other-user-worker: string, jwt: string) -> future-follow-user-result;
-    blocking-unfollow-user: func(other-user-xid: string, jwt: string) -> success-or-failure-result;
-    unfollow-user: func(other-user-xid: string, jwt: string) -> future-unfollow-user-result;
-    blocking-post-tweet: func(tweet-contents: string, tweet-xid: string, jwt: string) -> success-or-failure-result;
-    post-tweet: func(tweet-contents: string, tweet-xid: string, jwt: string) -> future-post-tweet-result;
-    blocking-get-tweet: func(tweet-xid: string, jwt: string) -> success-or-failure-result;
-    get-tweet: func(tweet-xid: string, jwt: string) -> future-get-tweet-result;
-    blocking-list-all-followed-tweets: func(before: string, limit: u32, jwt: string) -> list-tweets-result;
-    list-all-followed-tweets: func(before: string, limit: u32, jwt: string) -> future-list-all-followed-tweets-result;
-    blocking-list-user-tweets: func(before: string, limit: u32, jwt: string) -> list-tweets-result;
-    list-user-tweets: func(before: string, limit: u32, jwt: string) -> future-list-user-tweets-result;
+    blocking-following: func() -> following-result;
+    following: func() -> future-following-result;
+    blocking-follow-user: func(other-user-xid: string, other-user-worker: string) -> success-or-failure-result;
+    follow-user: func(other-user-xid: string, other-user-worker: string) -> future-follow-user-result;
+    blocking-unfollow-user: func(other-user-xid: string) -> success-or-failure-result;
+    unfollow-user: func(other-user-xid: string) -> future-unfollow-user-result;
+    blocking-post-tweet: func(tweet-contents: string, tweet-xid: string) -> success-or-failure-result;
+    post-tweet: func(tweet-contents: string, tweet-xid: string) -> future-post-tweet-result;
+    blocking-get-tweet: func(tweet-xid: string) -> success-or-failure-result;
+    get-tweet: func(tweet-xid: string) -> future-get-tweet-result;
+    blocking-list-all-followed-tweets: func(before: string, limit: u32) -> list-tweets-result;
+    list-all-followed-tweets: func(before: string, limit: u32) -> future-list-all-followed-tweets-result;
+    blocking-list-user-tweets: func(user-xid: string, before: string, limit: u32) -> list-tweets-result;
+    list-user-tweets: func(user-xid: string, before: string, limit: u32) -> future-list-user-tweets-result;
   }
 
 }
