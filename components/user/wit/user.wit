@@ -46,7 +46,6 @@ interface api {
     jwt: string) -> success-or-failure-result;
 
   get-tweet: func(
-    user-xid: string,
     tweet-xid: string,
     jwt: string) -> success-or-failure-result;
 
