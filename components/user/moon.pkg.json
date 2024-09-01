@@ -1,0 +1,30 @@
+{
+  "link": {
+    "wasm": {
+      "exports": [
+        "cabi_realloc:cabi_realloc",
+        "wasmExportGetUserInfo:golem:component/api#get-user-info",
+        "wasmExportGetUserInfoPostReturn:cabi_post_golem:component/api#get-user-info",
+        "wasmExportRegisterNewUser:golem:component/api#register-new-user",
+        "wasmExportRegisterNewUserPostReturn:cabi_post_golem:component/api#register-new-user",
+        "wasmExportUpdateProfilePicture:golem:component/api#update-profile-picture",
+        "wasmExportUpdateProfilePicturePostReturn:cabi_post_golem:component/api#update-profile-picture",
+        "wasmExportUserLogin:golem:component/api#user-login",
+        "wasmExportUserLoginPostReturn:cabi_post_golem:component/api#user-login"
+      ],
+      "export-memory-name": "memory",
+      "heap-start-address": 16
+    }
+  },
+  "import": [
+    "gmlewis/base64",
+    "gmlewis/golem-2024-hackathon/components/user-manager/ffi",
+    "gmlewis/sha256",
+    "gmlewis/spin-moonbit-sdk/common",
+    "gmlewis/spin-moonbit-sdk/gen",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/environment",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock",
+    "gmlewis/spin-moonbit-sdk/log",
+    "gmlewis/spin-moonbit-sdk/util"
+  ]
+}
