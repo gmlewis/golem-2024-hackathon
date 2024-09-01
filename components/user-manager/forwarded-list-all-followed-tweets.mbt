@@ -1,4 +1,4 @@
-pub fn list_all_followed_tweets(
+pub fn forwarded_list_all_followed_tweets(
   user_xid : String,
   before : String,
   limit : UInt,

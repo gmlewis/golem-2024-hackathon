@@ -1,4 +1,4 @@
-pub fn post_tweet(
+pub fn forwarded_post_tweet(
   tweet_contents : String,
   tweet_xid : String,
   jwt : String

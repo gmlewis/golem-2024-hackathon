@@ -96,19 +96,18 @@ pub fn Api::api(location : @types.Uri) -> Api {
   abort("todo")
 }
 
-pub fn Api::blocking_following(self : Api, jwt : String) -> FollowingResult {
+pub fn Api::blocking_following(self : Api) -> FollowingResult {
   abort("todo")
 }
 
-pub fn Api::following(self : Api, jwt : String) -> FutureFollowingResult {
+pub fn Api::following(self : Api) -> FutureFollowingResult {
   abort("todo")
 }
 
 pub fn Api::blocking_follow_user(
   self : Api,
   other_user_xid : String,
-  other_user_worker : String,
-  jwt : String
+  other_user_worker : String
 ) -> SuccessOrFailureResult {
   abort("todo")
 }
@@ -116,24 +115,21 @@ pub fn Api::blocking_follow_user(
 pub fn Api::follow_user(
   self : Api,
   other_user_xid : String,
-  other_user_worker : String,
-  jwt : String
+  other_user_worker : String
 ) -> FutureFollowUserResult {
   abort("todo")
 }
 
 pub fn Api::blocking_unfollow_user(
   self : Api,
-  other_user_xid : String,
-  jwt : String
+  other_user_xid : String
 ) -> SuccessOrFailureResult {
   abort("todo")
 }
 
 pub fn Api::unfollow_user(
   self : Api,
-  other_user_xid : String,
-  jwt : String
+  other_user_xid : String
 ) -> FutureUnfollowUserResult {
   abort("todo")
 }
@@ -141,8 +137,7 @@ pub fn Api::unfollow_user(
 pub fn Api::blocking_post_tweet(
   self : Api,
   tweet_contents : String,
-  tweet_xid : String,
-  jwt : String
+  tweet_xid : String
 ) -> SuccessOrFailureResult {
   abort("todo")
 }
@@ -150,33 +145,26 @@ pub fn Api::blocking_post_tweet(
 pub fn Api::post_tweet(
   self : Api,
   tweet_contents : String,
-  tweet_xid : String,
-  jwt : String
+  tweet_xid : String
 ) -> FuturePostTweetResult {
   abort("todo")
 }
 
 pub fn Api::blocking_get_tweet(
   self : Api,
-  tweet_xid : String,
-  jwt : String
+  tweet_xid : String
 ) -> SuccessOrFailureResult {
   abort("todo")
 }
 
-pub fn Api::get_tweet(
-  self : Api,
-  tweet_xid : String,
-  jwt : String
-) -> FutureGetTweetResult {
+pub fn Api::get_tweet(self : Api, tweet_xid : String) -> FutureGetTweetResult {
   abort("todo")
 }
 
 pub fn Api::blocking_list_all_followed_tweets(
   self : Api,
   before : String,
-  limit : UInt,
-  jwt : String
+  limit : UInt
 ) -> ListTweetsResult {
   abort("todo")
 }
@@ -184,26 +172,25 @@ pub fn Api::blocking_list_all_followed_tweets(
 pub fn Api::list_all_followed_tweets(
   self : Api,
   before : String,
-  limit : UInt,
-  jwt : String
+  limit : UInt
 ) -> FutureListAllFollowedTweetsResult {
   abort("todo")
 }
 
 pub fn Api::blocking_list_user_tweets(
   self : Api,
+  user_xid : String,
   before : String,
-  limit : UInt,
-  jwt : String
+  limit : UInt
 ) -> ListTweetsResult {
   abort("todo")
 }
 
 pub fn Api::list_user_tweets(
   self : Api,
+  user_xid : String,
   before : String,
-  limit : UInt,
-  jwt : String
+  limit : UInt
 ) -> FutureListUserTweetsResult {
   abort("todo")
 }

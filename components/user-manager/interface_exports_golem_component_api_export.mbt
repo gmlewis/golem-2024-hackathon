@@ -991,31 +991,26 @@ pub fn wasmExportConstructorApi(p0 : Int, p1 : Int) -> Int {
   return result0.0
 }
 
-pub fn wasmExportMethodApiBlockingFollowing(
-  p0 : Int,
-  p1 : Int,
-  p2 : Int
-) -> Int {
-  let result = @ffi.ptr2str(p1)
-  let result0 : FollowingResult = Api::blocking_following(Api::Api(p0), result)
+pub fn wasmExportMethodApiBlockingFollowing(p0 : Int) -> Int {
+  let result : FollowingResult = Api::blocking_following(Api::Api(p0))
   let return_area = @ffi.malloc(12)
-  match result0 {
+  match result {
     Error(payload) => {
       @ffi.store8(return_area + 0, 0)
       @ffi.store32(return_area + 8, payload.iter().count())
       @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
       ()
     }
-    Success(payload3) => {
+    Success(payload2) => {
       @ffi.store8(return_area + 0, 1)
-      let address = @ffi.malloc(payload3.user_xids.length() * 8)
-      for index = 0; index < payload3.user_xids.length(); index = index + 1 {
-        let element4 : String = payload3.user_xids[index]
-        let base5 = address + index * 8
-        @ffi.store32(base5 + 4, element4.iter().count())
-        @ffi.store32(base5 + 0, @ffi.str2ptr(element4))
+      let address = @ffi.malloc(payload2.user_xids.length() * 8)
+      for index = 0; index < payload2.user_xids.length(); index = index + 1 {
+        let element3 : String = payload2.user_xids[index]
+        let base4 = address + index * 8
+        @ffi.store32(base4 + 4, element3.iter().count())
+        @ffi.store32(base4 + 0, @ffi.str2ptr(element3))
       }
-      @ffi.store32(return_area + 8, payload3.user_xids.length())
+      @ffi.store32(return_area + 8, payload2.user_xids.length())
       @ffi.store32(return_area + 4, address)
       ()
     }
@@ -1038,10 +1033,9 @@ pub fn wasmExportMethodApiBlockingFollowingPostReturn(p0 : Int) -> Unit {
   }
 }
 
-pub fn wasmExportMethodApiFollowing(p0 : Int, p1 : Int, p2 : Int) -> Int {
-  let result = @ffi.ptr2str(p1)
-  let result0 : FutureFollowingResult = Api::following(Api::Api(p0), result)
-  return result0.0
+pub fn wasmExportMethodApiFollowing(p0 : Int) -> Int {
+  let result : FutureFollowingResult = Api::following(Api::Api(p0))
+  return result.0
 }
 
 pub fn wasmExportMethodApiBlockingFollowUser(
@@ -1049,31 +1043,27 @@ pub fn wasmExportMethodApiBlockingFollowUser(
   p1 : Int,
   p2 : Int,
   p3 : Int,
-  p4 : Int,
-  p5 : Int,
-  p6 : Int
+  p4 : Int
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
-  let result1 = @ffi.ptr2str(p5)
-  let result2 : SuccessOrFailureResult = Api::blocking_follow_user(
+  let result1 : SuccessOrFailureResult = Api::blocking_follow_user(
     Api::Api(p0),
     result,
     result0,
-    result1,
   )
   let return_area = @ffi.malloc(12)
-  match result2 {
+  match result1 {
     Error(payload) => {
       @ffi.store8(return_area + 0, 0)
       @ffi.store32(return_area + 8, payload.iter().count())
       @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
       ()
     }
-    Success(payload5) => {
+    Success(payload4) => {
       @ffi.store8(return_area + 0, 1)
-      @ffi.store32(return_area + 8, payload5.iter().count())
-      @ffi.store32(return_area + 4, @ffi.str2ptr(payload5))
+      @ffi.store32(return_area + 8, payload4.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload4))
       ()
     }
     _ => panic()
@@ -1094,23 +1084,65 @@ pub fn wasmExportMethodApiFollowUser(
   p1 : Int,
   p2 : Int,
   p3 : Int,
-  p4 : Int,
-  p5 : Int,
-  p6 : Int
+  p4 : Int
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
-  let result1 = @ffi.ptr2str(p5)
-  let result2 : FutureFollowUserResult = Api::follow_user(
+  let result1 : FutureFollowUserResult = Api::follow_user(
     Api::Api(p0),
     result,
     result0,
-    result1,
   )
-  return result2.0
+  return result1.0
 }
 
 pub fn wasmExportMethodApiBlockingUnfollowUser(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 : SuccessOrFailureResult = Api::blocking_unfollow_user(
+    Api::Api(p0),
+    result,
+  )
+  let return_area = @ffi.malloc(12)
+  match result0 {
+    Error(payload) => {
+      @ffi.store8(return_area + 0, 0)
+      @ffi.store32(return_area + 8, payload.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
+      ()
+    }
+    Success(payload3) => {
+      @ffi.store8(return_area + 0, 1)
+      @ffi.store32(return_area + 8, payload3.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload3))
+      ()
+    }
+    _ => panic()
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodApiBlockingUnfollowUserPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => @ffi.free(@ffi.load32(p0 + 4))
+    1 => @ffi.free(@ffi.load32(p0 + 4))
+  }
+}
+
+pub fn wasmExportMethodApiUnfollowUser(p0 : Int, p1 : Int, p2 : Int) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 : FutureUnfollowUserResult = Api::unfollow_user(
+    Api::Api(p0),
+    result,
+  )
+  return result0.0
+}
+
+pub fn wasmExportMethodApiBlockingPostTweet(
   p0 : Int,
   p1 : Int,
   p2 : Int,
@@ -1119,7 +1151,7 @@ pub fn wasmExportMethodApiBlockingUnfollowUser(
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
-  let result1 : SuccessOrFailureResult = Api::blocking_unfollow_user(
+  let result1 : SuccessOrFailureResult = Api::blocking_post_tweet(
     Api::Api(p0),
     result,
     result0,
@@ -1136,68 +1168,6 @@ pub fn wasmExportMethodApiBlockingUnfollowUser(
       @ffi.store8(return_area + 0, 1)
       @ffi.store32(return_area + 8, payload4.iter().count())
       @ffi.store32(return_area + 4, @ffi.str2ptr(payload4))
-      ()
-    }
-    _ => panic()
-  }
-  @ffi.free(return_area)
-  return return_area
-}
-
-pub fn wasmExportMethodApiBlockingUnfollowUserPostReturn(p0 : Int) -> Unit {
-  match @ffi.load8_u(p0 + 0) {
-    0 => @ffi.free(@ffi.load32(p0 + 4))
-    1 => @ffi.free(@ffi.load32(p0 + 4))
-  }
-}
-
-pub fn wasmExportMethodApiUnfollowUser(
-  p0 : Int,
-  p1 : Int,
-  p2 : Int,
-  p3 : Int,
-  p4 : Int
-) -> Int {
-  let result = @ffi.ptr2str(p1)
-  let result0 = @ffi.ptr2str(p3)
-  let result1 : FutureUnfollowUserResult = Api::unfollow_user(
-    Api::Api(p0),
-    result,
-    result0,
-  )
-  return result1.0
-}
-
-pub fn wasmExportMethodApiBlockingPostTweet(
-  p0 : Int,
-  p1 : Int,
-  p2 : Int,
-  p3 : Int,
-  p4 : Int,
-  p5 : Int,
-  p6 : Int
-) -> Int {
-  let result = @ffi.ptr2str(p1)
-  let result0 = @ffi.ptr2str(p3)
-  let result1 = @ffi.ptr2str(p5)
-  let result2 : SuccessOrFailureResult = Api::blocking_post_tweet(
-    Api::Api(p0),
-    result,
-    result0,
-    result1,
-  )
-  let return_area = @ffi.malloc(12)
-  match result2 {
-    Error(payload) => {
-      @ffi.store8(return_area + 0, 0)
-      @ffi.store32(return_area + 8, payload.iter().count())
-      @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
-      ()
-    }
-    Success(payload5) => {
-      @ffi.store8(return_area + 0, 1)
-      @ffi.store32(return_area + 8, payload5.iter().count())
-      @ffi.store32(return_area + 4, @ffi.str2ptr(payload5))
       ()
     }
     _ => panic()
@@ -1218,48 +1188,36 @@ pub fn wasmExportMethodApiPostTweet(
   p1 : Int,
   p2 : Int,
   p3 : Int,
-  p4 : Int,
-  p5 : Int,
-  p6 : Int
-) -> Int {
-  let result = @ffi.ptr2str(p1)
-  let result0 = @ffi.ptr2str(p3)
-  let result1 = @ffi.ptr2str(p5)
-  let result2 : FuturePostTweetResult = Api::post_tweet(
-    Api::Api(p0),
-    result,
-    result0,
-    result1,
-  )
-  return result2.0
-}
-
-pub fn wasmExportMethodApiBlockingGetTweet(
-  p0 : Int,
-  p1 : Int,
-  p2 : Int,
-  p3 : Int,
   p4 : Int
 ) -> Int {
   let result = @ffi.ptr2str(p1)
   let result0 = @ffi.ptr2str(p3)
-  let result1 : SuccessOrFailureResult = Api::blocking_get_tweet(
+  let result1 : FuturePostTweetResult = Api::post_tweet(
     Api::Api(p0),
     result,
     result0,
   )
+  return result1.0
+}
+
+pub fn wasmExportMethodApiBlockingGetTweet(p0 : Int, p1 : Int, p2 : Int) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 : SuccessOrFailureResult = Api::blocking_get_tweet(
+    Api::Api(p0),
+    result,
+  )
   let return_area = @ffi.malloc(12)
-  match result1 {
+  match result0 {
     Error(payload) => {
       @ffi.store8(return_area + 0, 0)
       @ffi.store32(return_area + 8, payload.iter().count())
       @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
       ()
     }
-    Success(payload4) => {
+    Success(payload3) => {
       @ffi.store8(return_area + 0, 1)
-      @ffi.store32(return_area + 8, payload4.iter().count())
-      @ffi.store32(return_area + 4, @ffi.str2ptr(payload4))
+      @ffi.store32(return_area + 8, payload3.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload3))
       ()
     }
     _ => panic()
@@ -1275,61 +1233,46 @@ pub fn wasmExportMethodApiBlockingGetTweetPostReturn(p0 : Int) -> Unit {
   }
 }
 
-pub fn wasmExportMethodApiGetTweet(
-  p0 : Int,
-  p1 : Int,
-  p2 : Int,
-  p3 : Int,
-  p4 : Int
-) -> Int {
+pub fn wasmExportMethodApiGetTweet(p0 : Int, p1 : Int, p2 : Int) -> Int {
   let result = @ffi.ptr2str(p1)
-  let result0 = @ffi.ptr2str(p3)
-  let result1 : FutureGetTweetResult = Api::get_tweet(
-    Api::Api(p0),
-    result,
-    result0,
-  )
-  return result1.0
+  let result0 : FutureGetTweetResult = Api::get_tweet(Api::Api(p0), result)
+  return result0.0
 }
 
 pub fn wasmExportMethodApiBlockingListAllFollowedTweets(
   p0 : Int,
   p1 : Int,
   p2 : Int,
-  p3 : Int,
-  p4 : Int,
-  p5 : Int
+  p3 : Int
 ) -> Int {
   let result = @ffi.ptr2str(p1)
-  let result0 = @ffi.ptr2str(p4)
-  let result1 : ListTweetsResult = Api::blocking_list_all_followed_tweets(
+  let result0 : ListTweetsResult = Api::blocking_list_all_followed_tweets(
     Api::Api(p0),
     result,
     p3.to_uint(),
-    result0,
   )
   let return_area = @ffi.malloc(12)
-  match result1 {
+  match result0 {
     Error(payload) => {
       @ffi.store8(return_area + 0, 0)
       @ffi.store32(return_area + 8, payload.iter().count())
       @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
       ()
     }
-    Success(payload4) => {
+    Success(payload3) => {
       @ffi.store8(return_area + 0, 1)
-      let address = @ffi.malloc(payload4.tweets.length() * 24)
-      for index = 0; index < payload4.tweets.length(); index = index + 1 {
-        let element5 : Tweet = payload4.tweets[index]
-        let base6 = address + index * 24
-        @ffi.store32(base6 + 4, element5.user_xid.iter().count())
-        @ffi.store32(base6 + 0, @ffi.str2ptr(element5.user_xid))
-        @ffi.store32(base6 + 12, element5.tweet_contents.iter().count())
-        @ffi.store32(base6 + 8, @ffi.str2ptr(element5.tweet_contents))
-        @ffi.store32(base6 + 20, element5.tweet_xid.iter().count())
-        @ffi.store32(base6 + 16, @ffi.str2ptr(element5.tweet_xid))
+      let address = @ffi.malloc(payload3.tweets.length() * 24)
+      for index = 0; index < payload3.tweets.length(); index = index + 1 {
+        let element4 : Tweet = payload3.tweets[index]
+        let base5 = address + index * 24
+        @ffi.store32(base5 + 4, element4.user_xid.iter().count())
+        @ffi.store32(base5 + 0, @ffi.str2ptr(element4.user_xid))
+        @ffi.store32(base5 + 12, element4.tweet_contents.iter().count())
+        @ffi.store32(base5 + 8, @ffi.str2ptr(element4.tweet_contents))
+        @ffi.store32(base5 + 20, element4.tweet_xid.iter().count())
+        @ffi.store32(base5 + 16, @ffi.str2ptr(element4.tweet_xid))
       }
-      @ffi.store32(return_area + 8, payload4.tweets.length())
+      @ffi.store32(return_area + 8, payload3.tweets.length())
       @ffi.store32(return_area + 4, address)
       ()
     }
@@ -1360,19 +1303,15 @@ pub fn wasmExportMethodApiListAllFollowedTweets(
   p0 : Int,
   p1 : Int,
   p2 : Int,
-  p3 : Int,
-  p4 : Int,
-  p5 : Int
+  p3 : Int
 ) -> Int {
   let result = @ffi.ptr2str(p1)
-  let result0 = @ffi.ptr2str(p4)
-  let result1 : FutureListAllFollowedTweetsResult = Api::list_all_followed_tweets(
+  let result0 : FutureListAllFollowedTweetsResult = Api::list_all_followed_tweets(
     Api::Api(p0),
     result,
     p3.to_uint(),
-    result0,
   )
-  return result1.0
+  return result0.0
 }
 
 pub fn wasmExportMethodApiBlockingListUserTweets(
@@ -1384,12 +1323,12 @@ pub fn wasmExportMethodApiBlockingListUserTweets(
   p5 : Int
 ) -> Int {
   let result = @ffi.ptr2str(p1)
-  let result0 = @ffi.ptr2str(p4)
+  let result0 = @ffi.ptr2str(p3)
   let result1 : ListTweetsResult = Api::blocking_list_user_tweets(
     Api::Api(p0),
     result,
-    p3.to_uint(),
     result0,
+    p5.to_uint(),
   )
   let return_area = @ffi.malloc(12)
   match result1 {
@@ -1446,12 +1385,12 @@ pub fn wasmExportMethodApiListUserTweets(
   p5 : Int
 ) -> Int {
   let result = @ffi.ptr2str(p1)
-  let result0 = @ffi.ptr2str(p4)
+  let result0 = @ffi.ptr2str(p3)
   let result1 : FutureListUserTweetsResult = Api::list_user_tweets(
     Api::Api(p0),
     result,
-    p3.to_uint(),
     result0,
+    p5.to_uint(),
   )
   return result1.0
 }
