@@ -1,0 +1,63 @@
+package golem:component-stub;
+
+interface stub-user-manager {
+  use golem:rpc/types@0.1.0.{uri as golem-rpc-uri};
+  use wasi:io/poll@0.2.0.{pollable as wasi-io-pollable};
+  use golem:component/api.{list-following};
+  use golem:component/api.{tweet};
+  use golem:component/api.{list-tweets};
+  use golem:component/api.{following-result};
+  use golem:component/api.{list-tweets-result};
+  use golem:component/api.{success-or-failure-result};
+
+  resource future-following-result {
+    subscribe: func() -> wasi-io-pollable;
+    get: func() -> option<following-result>;
+  }
+  resource future-follow-user-result {
+    subscribe: func() -> wasi-io-pollable;
+    get: func() -> option<success-or-failure-result>;
+  }
+  resource future-unfollow-user-result {
+    subscribe: func() -> wasi-io-pollable;
+    get: func() -> option<success-or-failure-result>;
+  }
+  resource future-post-tweet-result {
+    subscribe: func() -> wasi-io-pollable;
+    get: func() -> option<success-or-failure-result>;
+  }
+  resource future-get-tweet-result {
+    subscribe: func() -> wasi-io-pollable;
+    get: func() -> option<success-or-failure-result>;
+  }
+  resource future-list-all-followed-tweets-result {
+    subscribe: func() -> wasi-io-pollable;
+    get: func() -> option<list-tweets-result>;
+  }
+  resource future-list-user-tweets-result {
+    subscribe: func() -> wasi-io-pollable;
+    get: func() -> option<list-tweets-result>;
+  }
+  resource api {
+    constructor(location: golem-rpc-uri);
+    blocking-following: func(jwt: string) -> following-result;
+    following: func(jwt: string) -> future-following-result;
+    blocking-follow-user: func(other-user-xid: string, other-user-worker: string, jwt: string) -> success-or-failure-result;
+    follow-user: func(other-user-xid: string, other-user-worker: string, jwt: string) -> future-follow-user-result;
+    blocking-unfollow-user: func(other-user-xid: string, jwt: string) -> success-or-failure-result;
+    unfollow-user: func(other-user-xid: string, jwt: string) -> future-unfollow-user-result;
+    blocking-post-tweet: func(tweet-contents: string, tweet-xid: string, jwt: string) -> success-or-failure-result;
+    post-tweet: func(tweet-contents: string, tweet-xid: string, jwt: string) -> future-post-tweet-result;
+    blocking-get-tweet: func(tweet-xid: string, jwt: string) -> success-or-failure-result;
+    get-tweet: func(tweet-xid: string, jwt: string) -> future-get-tweet-result;
+    blocking-list-all-followed-tweets: func(before: string, limit: u32, jwt: string) -> list-tweets-result;
+    list-all-followed-tweets: func(before: string, limit: u32, jwt: string) -> future-list-all-followed-tweets-result;
+    blocking-list-user-tweets: func(before: string, limit: u32, jwt: string) -> list-tweets-result;
+    list-user-tweets: func(before: string, limit: u32, jwt: string) -> future-list-user-tweets-result;
+  }
+
+}
+
+world wasm-rpc-stub-user-manager {
+  export stub-user-manager;
+}
