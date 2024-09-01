@@ -33,6 +33,7 @@ var (
 	debug        = flag.Bool("debug", false, "Enable debug messages")
 	userHandle   = flag.String("handle", "", "User handle to create")
 	userPassword = flag.String("password", "", "User password to create")
+	userXID      = flag.String("xid", "", "User xid to create (optional)")
 )
 
 func main() {
@@ -49,18 +50,21 @@ func main() {
 	clientID := common.MustGetenv(clientIDEnvVar)
 	clientSecret := common.MustGetenv(clientSecretEnvVar)
 
-	userXID, err := xids.New("User")
-	must(err)
+	if *userXID == "" {
+		var err error
+		*userXID, err = xids.New("User")
+		must(err)
+	}
 
 	url := fmt.Sprintf("%v/v1/users", baseURL)
 	timestampMillis := time.Now().UnixMilli()
-	messageToHash := fmt.Sprintf("%v-%v-%v-%v-%v", *userHandle, *userPassword, userXID, clientID, timestampMillis)
+	messageToHash := fmt.Sprintf("%v-%v-%v-%v-%v", *userHandle, *userPassword, *userXID, clientID, timestampMillis)
 	hmacHash := common.GenHMACHash(messageToHash, clientSecret)
 
 	req := RegisterNewUser{
 		UserHandle:      *userHandle,
 		UserPassword:    *userPassword,
-		UserXID:         userXID,
+		UserXID:         *userXID,
 		ClientID:        clientID,
 		TimestampMillis: uint64(timestampMillis),
 		HMACHash:        hmacHash,
