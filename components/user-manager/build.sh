@@ -6,3 +6,4 @@ wasm-tools component embed \
     -o user-manager.wasm \
     --encoding utf16
 wasm-tools component new user-manager.wasm -o user-manager.wasm
+cp user-manager.wasm ~/Downloads/
