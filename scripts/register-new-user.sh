@@ -16,21 +16,21 @@ source ${REPO_DIR}/.env.development.local
 # go run ${REPO_DIR}/cmd/register-new-user/main.go -debug -handle "user-7" -password "${GOLEM_2024_HACKATHON_USER7_PASSWORD}" -xid "${GOLEM_2024_HACKATHON_USER7_XID}"
 
 # For Demo: manually create each new user worker since I couldn't figure out how to do that from the MoonBit wasm plugin.
-./golem-delete-user-worker.sh "user-1"
-./golem-delete-user-worker.sh "user-2"
-./golem-delete-user-worker.sh "user-3"
-./golem-delete-user-worker.sh "user-4"
-./golem-delete-user-worker.sh "user-5"
-./golem-delete-user-worker.sh "user-6"
-./golem-delete-user-worker.sh "user-7"
-
-./golem-add-user-worker.sh "user-1"
-./golem-add-user-worker.sh "user-2"
-./golem-add-user-worker.sh "user-3"
-./golem-add-user-worker.sh "user-4"
-./golem-add-user-worker.sh "user-5"
-./golem-add-user-worker.sh "user-6"
-./golem-add-user-worker.sh "user-7"
+# ./golem-delete-user-worker.sh "user-1"
+# ./golem-delete-user-worker.sh "user-2"
+# ./golem-delete-user-worker.sh "user-3"
+# ./golem-delete-user-worker.sh "user-4"
+# ./golem-delete-user-worker.sh "user-5"
+# ./golem-delete-user-worker.sh "user-6"
+# ./golem-delete-user-worker.sh "user-7"
+#
+# ./golem-add-user-worker.sh "user-1"
+# ./golem-add-user-worker.sh "user-2"
+# ./golem-add-user-worker.sh "user-3"
+# ./golem-add-user-worker.sh "user-4"
+# ./golem-add-user-worker.sh "user-5"
+# ./golem-add-user-worker.sh "user-6"
+# ./golem-add-user-worker.sh "user-7"
 
 # For Demo:
 golem-cli worker invoke-and-await \
