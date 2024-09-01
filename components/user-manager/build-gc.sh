@@ -3,7 +3,7 @@ rm -rf target
 moon build --target wasm-gc
 wasm-tools component embed \
     wit \
-    target/wasm-gc/release/build/component.wasm \
+    target/wasm-gc/release/build/gen/gen.wasm \
     -o user-manager-gc.wasm \
     --encoding utf16
 wasm-tools component new user-manager-gc.wasm -o user-manager-gc.wasm

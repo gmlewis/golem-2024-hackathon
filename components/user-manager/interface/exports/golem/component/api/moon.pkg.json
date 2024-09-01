@@ -1,1 +1,18 @@
-{ "import": [{ "path" : "golem/component/ffi", "alias" : "ffi" }] }
+{
+  "import": [
+    "gmlewis/base64",
+    "golem/component/ffi",
+    "golem/component/interface/imports/golem/api/host",
+    "golem/component/interface/imports/golem/api/loadSnapshot",
+    "golem/component/interface/imports/golem/api/saveSnapshot",
+    "golem/component/interface/imports/golem/rpc/types",
+    "gmlewis/sha256",
+    "gmlewis/spin-moonbit-sdk/common",
+    "gmlewis/spin-moonbit-sdk/gen",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/environment",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll",
+    "gmlewis/spin-moonbit-sdk/log",
+    "gmlewis/spin-moonbit-sdk/util"
+  ]
+}
