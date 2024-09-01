@@ -120,8 +120,8 @@ interface api {
   // Below this point are the definitions created by `golem-cli stubgen`
   // so that the `user-manager` singleton worker can make RPC worker-to-worker
   // calls to the `user` workers.
-  use golem:rpc/types@0.1.0.{uri as golem-rpc-uri};
-  use wasi:io/poll@0.2.0.{pollable as wasi-io-pollable};
+  // use golem:rpc/types@0.1.0.{uri as golem-rpc-uri};
+  // use wasi:io/poll@0.2.0.{pollable as wasi-io-pollable};
   // use golem:component/api.{list-following};
   // use golem:component/api.{tweet};
   // use golem:component/api.{list-tweets};
@@ -129,51 +129,51 @@ interface api {
   // use golem:component/api.{list-tweets-result};
   // use golem:component/api.{success-or-failure-result};
 
-  resource future-following-result {
-    subscribe: func() -> wasi-io-pollable;
-    get: func() -> option<following-result>;
-  }
-  resource future-follow-user-result {
-    subscribe: func() -> wasi-io-pollable;
-    get: func() -> option<success-or-failure-result>;
-  }
-  resource future-unfollow-user-result {
-    subscribe: func() -> wasi-io-pollable;
-    get: func() -> option<success-or-failure-result>;
-  }
-  resource future-post-tweet-result {
-    subscribe: func() -> wasi-io-pollable;
-    get: func() -> option<success-or-failure-result>;
-  }
-  resource future-get-tweet-result {
-    subscribe: func() -> wasi-io-pollable;
-    get: func() -> option<success-or-failure-result>;
-  }
-  resource future-list-all-followed-tweets-result {
-    subscribe: func() -> wasi-io-pollable;
-    get: func() -> option<list-tweets-result>;
-  }
-  resource future-list-user-tweets-result {
-    subscribe: func() -> wasi-io-pollable;
-    get: func() -> option<list-tweets-result>;
-  }
-  resource api {
-    constructor(location: golem-rpc-uri);
-    blocking-following: func() -> following-result;
-    following: func() -> future-following-result;
-    blocking-follow-user: func(other-user-xid: string, other-user-worker: string) -> success-or-failure-result;
-    follow-user: func(other-user-xid: string, other-user-worker: string) -> future-follow-user-result;
-    blocking-unfollow-user: func(other-user-xid: string) -> success-or-failure-result;
-    unfollow-user: func(other-user-xid: string) -> future-unfollow-user-result;
-    blocking-post-tweet: func(tweet-contents: string, tweet-xid: string) -> success-or-failure-result;
-    post-tweet: func(tweet-contents: string, tweet-xid: string) -> future-post-tweet-result;
-    blocking-get-tweet: func(tweet-xid: string) -> success-or-failure-result;
-    get-tweet: func(tweet-xid: string) -> future-get-tweet-result;
-    blocking-list-all-followed-tweets: func(before: string, limit: u32) -> list-tweets-result;
-    list-all-followed-tweets: func(before: string, limit: u32) -> future-list-all-followed-tweets-result;
-    blocking-list-user-tweets: func(user-xid: string, before: string, limit: u32) -> list-tweets-result;
-    list-user-tweets: func(user-xid: string, before: string, limit: u32) -> future-list-user-tweets-result;
-  }
+  // resource future-following-result {
+  //   subscribe: func() -> wasi-io-pollable;
+  //   get: func() -> option<following-result>;
+  // }
+  // resource future-follow-user-result {
+  //   subscribe: func() -> wasi-io-pollable;
+  //   get: func() -> option<success-or-failure-result>;
+  // }
+  // resource future-unfollow-user-result {
+  //   subscribe: func() -> wasi-io-pollable;
+  //   get: func() -> option<success-or-failure-result>;
+  // }
+  // resource future-post-tweet-result {
+  //   subscribe: func() -> wasi-io-pollable;
+  //   get: func() -> option<success-or-failure-result>;
+  // }
+  // resource future-get-tweet-result {
+  //   subscribe: func() -> wasi-io-pollable;
+  //   get: func() -> option<success-or-failure-result>;
+  // }
+  // resource future-list-all-followed-tweets-result {
+  //   subscribe: func() -> wasi-io-pollable;
+  //   get: func() -> option<list-tweets-result>;
+  // }
+  // resource future-list-user-tweets-result {
+  //   subscribe: func() -> wasi-io-pollable;
+  //   get: func() -> option<list-tweets-result>;
+  // }
+  // resource api {
+  //   constructor(location: golem-rpc-uri);
+  //   blocking-following: func() -> following-result;
+  //   following: func() -> future-following-result;
+  //   blocking-follow-user: func(other-user-xid: string, other-user-worker: string) -> success-or-failure-result;
+  //   follow-user: func(other-user-xid: string, other-user-worker: string) -> future-follow-user-result;
+  //   blocking-unfollow-user: func(other-user-xid: string) -> success-or-failure-result;
+  //   unfollow-user: func(other-user-xid: string) -> future-unfollow-user-result;
+  //   blocking-post-tweet: func(tweet-contents: string, tweet-xid: string) -> success-or-failure-result;
+  //   post-tweet: func(tweet-contents: string, tweet-xid: string) -> future-post-tweet-result;
+  //   blocking-get-tweet: func(tweet-xid: string) -> success-or-failure-result;
+  //   get-tweet: func(tweet-xid: string) -> future-get-tweet-result;
+  //   blocking-list-all-followed-tweets: func(before: string, limit: u32) -> list-tweets-result;
+  //   list-all-followed-tweets: func(before: string, limit: u32) -> future-list-all-followed-tweets-result;
+  //   blocking-list-user-tweets: func(user-xid: string, before: string, limit: u32) -> list-tweets-result;
+  //   list-user-tweets: func(user-xid: string, before: string, limit: u32) -> future-list-user-tweets-result;
+  // }
 
 }
 

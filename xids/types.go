@@ -6,6 +6,10 @@ import (
 	"github.com/rs/xid"
 )
 
+type tweet struct{}
+
+func (u tweet) Prefix() string { return "tweet" }
+
 type user struct{}
 
 func (u user) Prefix() string { return "user" }

@@ -15,12 +15,17 @@ import (
 // New returns a globally-unique XID for the given `typeName`.
 func New(typeName string) (string, error) {
 	switch typeName {
+	case "Tweet":
+		return NewTweet(), nil
 	case "User":
 		return NewUser(), nil
 	default:
 		return "", fmt.Errorf("xids.New: unknown typeName %q", typeName)
 	}
 }
+
+// NewTweet generates a globally-unique XID for a Tweet.
+func NewTweet() string { return new[tweet]().String() }
 
 // NewUser generates a globally-unique XID for a User.
 func NewUser() string { return new[user]().String() }
