@@ -5,7 +5,7 @@ let all_follows : Ref[Map[String, String]] = { val: {  } }
 
 pub fn following() -> FollowingResult {
   let user_xids = all_follows.val.keys().collect()
-  let total_follows = all_follows.val.size()
-  @log.info("following: \{total_follows} total follows")
+  // let total_follows = all_follows.val.size()
+  // @log.info("following: \{total_follows} total follows")
   Success({ user_xids, })
 }

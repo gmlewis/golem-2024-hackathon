@@ -10,41 +10,41 @@ fn validate_jwt(jwt : String) -> Result[JWTPayload, String] {
   //
   let parts = jwt.split(".").collect()
   if parts.length() != 3 {
-    let len = parts.length()
-    @log.error("validate_jwt: got \{len} parts, want 3")
+    // let len = parts.length()
+    // @log.error("validate_jwt: got \{len} parts, want 3")
     return Err("unauthorized")
   }
   if parts[0] != "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9" {
     // {"alg":"RS256","typ": "JWT"}
-    @log.error("validate_jwt: invalid header: \{parts[0]}")
+    // @log.error("validate_jwt: invalid header: \{parts[0]}")
     return Err("unauthorized")
   }
   let payload = try {
     @base64.std_decode2str!(parts[1], no_padding=true)
   } catch {
-    @base64.CorruptInputError(e) => {
-      @log.error("validate_jwt: invalid payload: \{e}")
+    _ =>
+      // @base64.CorruptInputError(e) =>
+      // @log.error("validate_jwt: invalid payload: \{e}")
       return Err("unauthorized")
-    }
   }
   let json = try {
     @json.parse!(payload)
   } catch {
-    e => {
-      @log.error("validate_jwt: invalid payload: \{e}")
+    _ =>
+      // @log.error("validate_jwt: invalid payload: \{e}")
       return Err("unauthorized")
-    }
   }
   let payload : JWTPayload = try {
     @json.from_json!(json)
   } catch {
-    e => {
-      @log.error("validate_jwt: invalid payload: \{e}")
+    _ =>
+      // @log.error("validate_jwt: invalid payload: \{e}")
       return Err("unauthorized")
-    }
   }
-  // TODO: Stop wasting precious time on this and come back to it later.
-  Ok(payload)
+  Ok(
+    // TODO: Stop wasting precious time on this and come back to it later.
+    payload,
+  )
 }
 
 test "base64 works correctly on payload" {

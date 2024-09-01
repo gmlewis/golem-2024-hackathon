@@ -10,7 +10,7 @@ fn validate_hmac(
   try {
     let saved_client_id = get_env_var!("GOLEM_2024_HACKATHON_CLIENT_ID")
     if saved_client_id != client_id {
-      @log.error("bad client id: got '\{client_id}', want '\{saved_client_id}'")
+      // @log.error("bad client id: got '\{client_id}', want '\{saved_client_id}'")
       return Err("unauthorized")
     }
   } catch {
@@ -27,9 +27,9 @@ fn validate_hmac(
   let timestamp_seconds = timestamp_millis / 1000
   let now_diff = (timestamp_seconds.to_int64() - now.seconds.to_int64()).abs()
   if now_diff > time_skew_grace_period_seconds {
-    @log.error(
-      "rejected timestamp: got='\{timestamp_seconds}', now=\{now}, diff='\{now_diff}'",
-    )
+    // @log.error(
+    //   "rejected timestamp: got='\{timestamp_seconds}', now=\{now}, diff='\{now_diff}'",
+    // )
     return Err("unauthorized")
   }
   // check message
@@ -38,9 +38,9 @@ fn validate_hmac(
     @base64.str2bytes(client_secret),
   )
   if computed_sha256sum != hmac_hash {
-    @log.error(
-      "bad hmac_hash='\{hmac_hash}', want '\{computed_sha256sum}' for obj_name='\{message_to_hash}'",
-    )
+    // @log.error(
+    //   "bad hmac_hash='\{hmac_hash}', want '\{computed_sha256sum}' for obj_name='\{message_to_hash}'",
+    // )
     return Err("unauthorized")
   }
   Ok(())
