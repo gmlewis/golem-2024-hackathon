@@ -2,8 +2,13 @@ package golem:component;
 
 interface api {
   // records
-  record following-result {
+  record list-following {
     user-xids: list<string>,
+  }
+
+  record following-result {
+    error(string),
+    success(list-following),
   }
 
   record tweet {

@@ -14,8 +14,13 @@ interface api {
     worker-urn: string,
   }
 
-  record following-result {
+  record list-following {
     user-xids: list<string>,
+  }
+
+  record following-result {
+    error(string),
+    success(list-following),
   }
 
   record tweet {
@@ -117,5 +122,6 @@ world user-manager {
   import wasi:cli/environment@0.2.0;
   import wasi:cli/stderr@0.2.0;
   import wasi:clocks/wall-clock@0.2.0;
+  import golem:api@0.2.0;
   export api;
 }
