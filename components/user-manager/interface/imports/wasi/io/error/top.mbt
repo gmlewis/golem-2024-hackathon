@@ -21,8 +21,9 @@
 pub type Error_ Int derive(Show, Eq)
 
 pub fn Error_::drop(self : Error_) -> Unit {
-      wasmImportResourceDropError_(self.0)
+  wasmImportResourceDropError_(self.0)
 }
+
 /// Returns a string that is suitable to assist humans in debugging
 /// this error.
 ///
@@ -31,13 +32,9 @@ pub fn Error_::drop(self : Error_) -> Unit {
 /// details. Parsing this string is a major platform-compatibility
 /// hazard.
 pub fn Error_::to_debug_string(self : Error_) -> String {
-
-      let return_area = @ffi.malloc(8)
-      wasmImportMethodErrorToDebugString(self.0, return_area);
-
-      let result = @ffi.ptr2str(@ffi.load32((return_area) + 0))
-      @ffi.free(return_area)
-      return result
-
+  let return_area = @ffi.malloc(8)
+  wasmImportMethodErrorToDebugString(self.0, return_area)
+  let result = @ffi.ptr2str(@ffi.load32(return_area + 0))
+  @ffi.free(return_area)
+  return result
 }
-

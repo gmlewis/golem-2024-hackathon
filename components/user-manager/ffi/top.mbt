@@ -1,4 +1,3 @@
-
 pub extern "wasm" fn extend16(value : Int) -> Int =
   #|(func (param i32) (result i32) local.get 0 i32.extend16_s)
 
@@ -129,8 +128,9 @@ pub extern "wasm" fn ptr2double_array(ptr : Int) -> FixedArray[Double] =
   #|(func (param i32) (result i32) local.get 0 i32.const 4 i32.sub i32.load i32.const 2 i32.lsr i32.const 241 i32.lor local.get 0 i32.const 4 i32.sub i32.store local.get 0 i32.const 8 i32.sub)
 
 pub trait Any {}
+
 pub struct Cleanup {
-    address : Int
-    size : Int
-    align : Int
+  address : Int
+  size : Int
+  align : Int
 }
