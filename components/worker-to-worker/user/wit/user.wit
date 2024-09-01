@@ -1,0 +1,76 @@
+package golem:component;
+
+interface api {
+  // records
+  record list-following {
+    user-xids: list<string>,
+  }
+
+  record tweet {
+    user-xid: string,
+    tweet-contents: string,
+    tweet-xid: string,
+  }
+
+  record list-tweets {
+    tweets: list<tweet>,
+  }
+
+  // variants
+  variant following-result {
+    error(string),
+    success(list-following),
+  }
+
+  variant list-tweets-result {
+    error(string),
+    success(list-tweets),
+  }
+
+  variant success-or-failure-result {
+    error(string),
+    success(string),
+  }
+
+  // JWT-protected endpoints
+  following: func(
+    jwt: string) -> following-result;
+
+  follow-user: func(
+    other-user-xid: string,
+    other-user-worker: string,
+    jwt: string) -> success-or-failure-result;
+
+  unfollow-user: func(
+    other-user-xid: string,
+    jwt: string) -> success-or-failure-result;
+
+  post-tweet: func(
+    tweet-contents: string,
+    tweet-xid: string,
+    jwt: string) -> success-or-failure-result;
+
+  get-tweet: func(
+    tweet-xid: string,
+    jwt: string) -> success-or-failure-result;
+
+  list-all-followed-tweets: func(
+    before: string,
+    limit: u32,
+    jwt: string) -> list-tweets-result;
+
+  list-user-tweets: func(
+    before: string,
+    limit: u32,
+    jwt: string) -> list-tweets-result;
+}
+
+world user-manager {
+  import wasi:cli/environment@0.2.0;
+  import wasi:cli/stderr@0.2.0;
+  import wasi:clocks/wall-clock@0.2.0;
+  import golem:api/host@0.2.0;
+  import golem:api/save-snapshot@0.2.0;
+  import golem:api/load-snapshot@0.2.0;
+  export api;
+}

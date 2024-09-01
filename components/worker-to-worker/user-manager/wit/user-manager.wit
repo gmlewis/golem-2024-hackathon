@@ -1,0 +1,129 @@
+package golem:component;
+
+interface api {
+  // records
+  record user-auth-info {
+    user-xid: string,
+    user-jwt: string,
+  }
+
+  record user-info {
+    base64-profile-jpg: string,
+    user-handle: string,
+    user-xid: string,
+    worker-urn: string,
+  }
+
+  record list-following {
+    user-xids: list<string>,
+  }
+
+  record tweet {
+    user-xid: string,
+    tweet-contents: string,
+    tweet-xid: string,
+  }
+
+  record list-tweets {
+    tweets: list<tweet>,
+  }
+
+  // variants
+  variant following-result {
+    error(string),
+    success(list-following),
+  }
+
+  variant get-user-info-result {
+    error(string),
+    success(user-info),
+  }
+
+  variant list-tweets-result {
+    error(string),
+    success(list-tweets),
+  }
+
+  variant success-or-failure-result {
+    error(string),
+    success(string),
+  }
+
+  variant user-auth-result {
+    error(string),
+    success(user-auth-info),
+  }
+
+  // JWT-protected endpoints
+  delete-user: func(
+    jwt: string) -> get-user-info-result;
+
+  get-user-info: func(
+    user-handle: string,
+    jwt: string) -> get-user-info-result;
+
+  update-profile-picture: func(
+    base64-profile-jpg: string,
+    jwt: string) -> success-or-failure-result;
+
+  // JWT-protected endpoints that are forwarded to individual `user` workers
+  following: func(
+    user-xid: string,
+    jwt: string) -> following-result;
+
+  follow-user: func(
+    other-user-xid: string,
+    jwt: string) -> success-or-failure-result;
+
+  unfollow-user: func(
+    other-user-xid: string,
+    jwt: string) -> success-or-failure-result;
+
+  post-tweet: func(
+    tweet-contents: string,
+    tweet-xid: string,
+    jwt: string) -> success-or-failure-result;
+
+  get-tweet: func(
+    user-xid: string,
+    tweet-xid: string,
+    jwt: string) -> success-or-failure-result;
+
+  list-all-followed-tweets: func(
+    user-xid: string,
+    before: string,
+    limit: u32,
+    jwt: string) -> list-tweets-result;
+
+  list-user-tweets: func(
+    user-xid: string,
+    before: string,
+    limit: u32,
+    jwt: string) -> list-tweets-result;
+
+  // HMAC-protected endpoints
+  register-new-user: func(
+    user-handle: string,
+    user-password: string,
+    user-xid: string,
+    client-id: string,
+    timestamp-millis: u64,
+    hmac-hash: string) -> user-auth-result;
+
+  user-login: func(
+    user-handle: string,
+    user-password: string,
+    client-id: string,
+    timestamp-millis: u64,
+    hmac-hash: string) -> user-auth-result;
+}
+
+world user-manager {
+  import wasi:cli/environment@0.2.0;
+  import wasi:cli/stderr@0.2.0;
+  import wasi:clocks/wall-clock@0.2.0;
+  import golem:api/host@0.2.0;
+  import golem:api/save-snapshot@0.2.0;
+  import golem:api/load-snapshot@0.2.0;
+  export api;
+}
