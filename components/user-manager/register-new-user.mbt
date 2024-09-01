@@ -31,9 +31,11 @@ pub fn register_new_user(
     }
     Err(_) => ()
   }
-  // add the handle to the lookup map
+  // TODO: Create a new `user` worker to handle all tweets and follows for this user.
+  //
+  // Add the handle to the lookup map
   user_handle_to_xid.val.set(user_handle, user_xid)
-  // create the new user
+  // Create the new user
   all_users.val.set(user_xid, { base64_profile_jpg: "", user_handle, user_xid })
   let user_jwt = "" // TODO
   @log.info(

@@ -111,9 +111,13 @@ export GOLEM_2024_HACKATHON_CLIENT_SECRET='abc123!@#$%...xyz'
 
 export GOLEM_2024_HACKATHON_USER1_PASSWORD=hackathon-user-1-password
 export GOLEM_2024_HACKATHON_USER1_XID=...
+export GOLEM_2024_HACKATHON_USER1_WORKER="urn:worker:.../user-1"
 
 export GOLEM_2024_HACKATHON_USER2_PASSWORD=hackathon-user-2-password
 export GOLEM_2024_HACKATHON_USER2_XID=...
+export GOLEM_2024_HACKATHON_USER2_WORKER="urn:worker:.../user-2"
+
+...
 
 export GOLEM_2024_HACKATHON_PUBLIC_KEY=$(cat <<EOF
 -----BEGIN PUBLIC KEY-----
