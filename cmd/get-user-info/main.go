@@ -62,9 +62,9 @@ func main() {
 	jwt, err := common.GenUserJWT(*thisUser, *thisXID, privateKey)
 	must(err)
 
-	log.Printf("DEBUG JWT:\n%v", jwt)
-
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %v", jwt))
+	// TODO: put back the "Bearer " prefix.
+	// req.Header.Set("Authorization", fmt.Sprintf("Bearer %v", jwt))
+	req.Header.Set("Authorization", jwt)
 
 	resp, err := c.Do(req)
 	must(err)

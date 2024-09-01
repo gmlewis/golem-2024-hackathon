@@ -6,6 +6,7 @@ fn validate_jwt(jwt : String) -> Result[JWTPayload, String] {
   } catch {
     EnvVarError(e) => return Err(e)
   }
+  // TODO: `jwt` may have a leading "Bearer " prefix - strip it.
   //
   let parts = jwt.split(".").collect()
   if parts.length() != 3 {

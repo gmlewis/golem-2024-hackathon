@@ -3,4 +3,4 @@ SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 REPO_DIR=$(realpath ${SCRIPT_DIR}/..)
 source ${REPO_DIR}/.env.development.local
 
-go run cmd/update-profile-picture/main.go "$@"
+go run ${REPO_DIR}/cmd/update-profile-picture/main.go "$@"
