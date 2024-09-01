@@ -12,7 +12,7 @@ pub struct UserInfo {
   worker_urn : String
 } derive(Show, Eq)
 
-pub struct FollowingResult {
+pub struct ListFollowing {
   user_xids : Array[String]
 } derive(Show, Eq)
 
@@ -27,6 +27,11 @@ pub struct ListTweets {
 } derive(Show, Eq)
 
 /// variants
+pub enum FollowingResult {
+  Error(String)
+  Success(ListFollowing)
+} derive(Show, Eq)
+
 pub enum GetUserInfoResult {
   Error(String)
   Success(UserInfo)

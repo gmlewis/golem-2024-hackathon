@@ -123,26 +123,44 @@ pub fn wasmExportFollowing(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
   let result1 : FollowingResult = following(result, result0)
-  let return_area = @ffi.malloc(8)
-  let address = @ffi.malloc(result1.user_xids.length() * 8)
-  for index = 0; index < result1.user_xids.length(); index = index + 1 {
-    let element : String = result1.user_xids[index]
-    let base = address + index * 8
-    @ffi.store32(base + 4, element.iter().count())
-    @ffi.store32(base + 0, @ffi.str2ptr(element))
+  let return_area = @ffi.malloc(12)
+  match result1 {
+    Error(payload) => {
+      @ffi.store8(return_area + 0, 0)
+      @ffi.store32(return_area + 8, payload.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
+      ()
+    }
+    Success(payload4) => {
+      @ffi.store8(return_area + 0, 1)
+      let address = @ffi.malloc(payload4.user_xids.length() * 8)
+      for index = 0; index < payload4.user_xids.length(); index = index + 1 {
+        let element5 : String = payload4.user_xids[index]
+        let base6 = address + index * 8
+        @ffi.store32(base6 + 4, element5.iter().count())
+        @ffi.store32(base6 + 0, @ffi.str2ptr(element5))
+      }
+      @ffi.store32(return_area + 8, payload4.user_xids.length())
+      @ffi.store32(return_area + 4, address)
+      ()
+    }
+    _ => panic()
   }
-  @ffi.store32(return_area + 4, result1.user_xids.length())
-  @ffi.store32(return_area + 0, address)
   @ffi.free(return_area)
   return return_area
 }
 
 pub fn wasmExportFollowingPostReturn(p0 : Int) -> Unit {
-  for index = 0; index < @ffi.load32(p0 + 4); index = index + 1 {
-    let base = @ffi.load32(p0 + 0) + index * 8
-    @ffi.free(@ffi.load32(base + 0))
+  match @ffi.load8_u(p0 + 0) {
+    0 => @ffi.free(@ffi.load32(p0 + 4))
+    1 => {
+      for index = 0; index < @ffi.load32(p0 + 8); index = index + 1 {
+        let base3 = @ffi.load32(p0 + 4) + index * 8
+        @ffi.free(@ffi.load32(base3 + 0))
+      }
+      @ffi.free(@ffi.load32(p0 + 4))
+    }
   }
-  @ffi.free(@ffi.load32(p0 + 0))
 }
 
 pub fn wasmExportFollowUser(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {

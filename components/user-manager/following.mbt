@@ -4,5 +4,5 @@ pub fn following(user_xid : String, jwt : String) -> FollowingResult {
     Err(s) => return Error(s)
   }
   //
-  {  }
+  Error("todo")
 }
