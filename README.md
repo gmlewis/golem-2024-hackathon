@@ -135,3 +135,15 @@ export GOLEM_2024_HACKATHON_PRIVATE_KEY=$(cat <<EOF2
 EOF2
 )
 ```
+
+Then there are two components to build: `user-manager` and `user`.
+
+```bash
+$ cd components/user-manager
+$ ./build.sh
+$ cd ../user
+$ ./build.sh
+```
+
+At this point, you can upload the components and start trying
+out the API endpoints.
