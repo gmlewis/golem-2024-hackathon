@@ -1,7 +1,7 @@
 pub fn forwarded_get_tweet(
-  user_xid : String,
-  tweet_xid : String,
-  jwt : String
+  _user_xid : String,
+  _tweet_xid : String,
+  _jwt : String
 ) -> SuccessOrFailureResult {
   abort("todo")
 }

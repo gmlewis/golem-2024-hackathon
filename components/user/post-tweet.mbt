@@ -9,6 +9,19 @@ pub fn post_tweet(
   tweet_contents : String,
   tweet_xid : String
 ) -> SuccessOrFailureResult {
-  all_tweets.val.set(tweet_xid, tweet_contents)
-  Success("tweet posted")
+  // To keep the tweets sorted in newest-to-oldest
+  // order, we need to create a new map with this
+  // tweet at the head, then copy over the remaining
+  // tweets while preserving their order.
+  let new_map : Map[String, String] = Map::new(
+    capacity=all_tweets.val.size() + 1,
+  )
+  new_map.set(tweet_xid, tweet_contents) // newest first
+  for k, v in all_tweets.val.iter2() {
+    new_map.set(k, v)
+  }
+  all_tweets.val = new_map
+  let total_tweets = all_tweets.val.size()
+  @log.info("post_tweet: \{total_tweets} total tweets")
+  Success("tweet '\{tweet_xid}' posted")
 }

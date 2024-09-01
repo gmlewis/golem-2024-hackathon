@@ -1,8 +1,8 @@
 pub fn forwarded_list_user_tweets(
-  user_xid : String,
-  before : String,
-  limit : UInt,
-  jwt : String
+  _user_xid : String,
+  _before : String,
+  _limit : UInt,
+  _jwt : String
 ) -> ListTweetsResult {
   abort("todo")
 }

@@ -1,6 +1,6 @@
 pub fn forwarded_post_tweet(
-  tweet_contents : String,
-  tweet_xid : String,
+  _tweet_contents : String,
+  _tweet_xid : String,
   jwt : String
 ) -> SuccessOrFailureResult {
   let payload = match validate_jwt(jwt) {
@@ -9,11 +9,11 @@ pub fn forwarded_post_tweet(
   }
   //
   let user_xid = payload.sub
-  let user = match all_users.val.get(user_xid) {
+  let _user = match all_users.val.get(user_xid) {
     Some(user) => user
     _ => return Error("user \{user_xid} not found")
   }
   //
 
-  Success("yo")
+  Success("forwarded_post_tweet: TODO")
 }

@@ -1,6 +1,6 @@
 pub fn forwarded_follow_user(
-  other_user_xid : String,
-  jwt : String
+  _other_user_xid : String,
+  _jwt : String
 ) -> SuccessOrFailureResult {
   abort("todo")
 }

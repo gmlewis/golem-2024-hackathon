@@ -1,7 +1,7 @@
 /// `validate_jwt` validates a JWT using the public key provided as an env var.
 fn validate_jwt(jwt : String) -> Result[JWTPayload, String] {
   // get public key
-  let public_key = try {
+  let _public_key = try {
     get_env_var!("GOLEM_2024_HACKATHON_PUBLIC_KEY")
   } catch {
     EnvVarError(e) => return Err(e)

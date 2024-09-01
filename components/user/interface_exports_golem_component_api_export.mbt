@@ -23,7 +23,7 @@ pub fn wasmExportFollowing() -> Int {
       @ffi.store32(return_area + 4, address)
       ()
     }
-    _ => panic()
+    // _ => panic()
   }
   @ffi.free(return_area)
   return return_area
@@ -39,10 +39,11 @@ pub fn wasmExportFollowingPostReturn(p0 : Int) -> Unit {
       }
       @ffi.free(@ffi.load32(p0 + 4))
     }
+    _ => ()
   }
 }
 
-pub fn wasmExportFollowUser(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
+pub fn wasmExportFollowUser(p0 : Int, _p1 : Int, p2 : Int, _p3 : Int) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
   let result1 : SuccessOrFailureResult = follow_user(result, result0)
@@ -60,7 +61,7 @@ pub fn wasmExportFollowUser(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
       @ffi.store32(return_area + 4, @ffi.str2ptr(payload4))
       ()
     }
-    _ => panic()
+    // _ => panic()
   }
   @ffi.free(return_area)
   return return_area
@@ -70,10 +71,11 @@ pub fn wasmExportFollowUserPostReturn(p0 : Int) -> Unit {
   match @ffi.load8_u(p0 + 0) {
     0 => @ffi.free(@ffi.load32(p0 + 4))
     1 => @ffi.free(@ffi.load32(p0 + 4))
+    _ => ()
   }
 }
 
-pub fn wasmExportUnfollowUser(p0 : Int, p1 : Int) -> Int {
+pub fn wasmExportUnfollowUser(p0 : Int, _p1 : Int) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 : SuccessOrFailureResult = unfollow_user(result)
   let return_area = @ffi.malloc(12)
@@ -90,7 +92,7 @@ pub fn wasmExportUnfollowUser(p0 : Int, p1 : Int) -> Int {
       @ffi.store32(return_area + 4, @ffi.str2ptr(payload3))
       ()
     }
-    _ => panic()
+    // _ => panic()
   }
   @ffi.free(return_area)
   return return_area
@@ -100,10 +102,11 @@ pub fn wasmExportUnfollowUserPostReturn(p0 : Int) -> Unit {
   match @ffi.load8_u(p0 + 0) {
     0 => @ffi.free(@ffi.load32(p0 + 4))
     1 => @ffi.free(@ffi.load32(p0 + 4))
+    _ => ()
   }
 }
 
-pub fn wasmExportPostTweet(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
+pub fn wasmExportPostTweet(p0 : Int, _p1 : Int, p2 : Int, _p3 : Int) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
   let result1 : SuccessOrFailureResult = post_tweet(result, result0)
@@ -121,7 +124,7 @@ pub fn wasmExportPostTweet(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
       @ffi.store32(return_area + 4, @ffi.str2ptr(payload4))
       ()
     }
-    _ => panic()
+    // _ => panic()
   }
   @ffi.free(return_area)
   return return_area
@@ -131,10 +134,11 @@ pub fn wasmExportPostTweetPostReturn(p0 : Int) -> Unit {
   match @ffi.load8_u(p0 + 0) {
     0 => @ffi.free(@ffi.load32(p0 + 4))
     1 => @ffi.free(@ffi.load32(p0 + 4))
+    _ => ()
   }
 }
 
-pub fn wasmExportGetTweet(p0 : Int, p1 : Int) -> Int {
+pub fn wasmExportGetTweet(p0 : Int, _p1 : Int) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 : SuccessOrFailureResult = get_tweet(result)
   let return_area = @ffi.malloc(12)
@@ -151,7 +155,7 @@ pub fn wasmExportGetTweet(p0 : Int, p1 : Int) -> Int {
       @ffi.store32(return_area + 4, @ffi.str2ptr(payload3))
       ()
     }
-    _ => panic()
+    // _ => panic()
   }
   @ffi.free(return_area)
   return return_area
@@ -161,10 +165,11 @@ pub fn wasmExportGetTweetPostReturn(p0 : Int) -> Unit {
   match @ffi.load8_u(p0 + 0) {
     0 => @ffi.free(@ffi.load32(p0 + 4))
     1 => @ffi.free(@ffi.load32(p0 + 4))
+    _ => ()
   }
 }
 
-pub fn wasmExportListAllFollowedTweets(p0 : Int, p1 : Int, p2 : Int) -> Int {
+pub fn wasmExportListAllFollowedTweets(p0 : Int, _p1 : Int, p2 : Int) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 : ListTweetsResult = list_all_followed_tweets(
     result,
@@ -195,7 +200,7 @@ pub fn wasmExportListAllFollowedTweets(p0 : Int, p1 : Int, p2 : Int) -> Int {
       @ffi.store32(return_area + 4, address)
       ()
     }
-    _ => panic()
+    // _ => panic()
   }
   @ffi.free(return_area)
   return return_area
@@ -213,14 +218,15 @@ pub fn wasmExportListAllFollowedTweetsPostReturn(p0 : Int) -> Unit {
       }
       @ffi.free(@ffi.load32(p0 + 4))
     }
+    _ => ()
   }
 }
 
 pub fn wasmExportListUserTweets(
   p0 : Int,
-  p1 : Int,
+  _p1 : Int,
   p2 : Int,
-  p3 : Int,
+  _p3 : Int,
   p4 : Int
 ) -> Int {
   let result = @ffi.ptr2str(p0)
@@ -255,7 +261,7 @@ pub fn wasmExportListUserTweets(
       @ffi.store32(return_area + 4, address)
       ()
     }
-    _ => panic()
+    // _ => panic()
   }
   @ffi.free(return_area)
   return return_area
@@ -273,5 +279,6 @@ pub fn wasmExportListUserTweetsPostReturn(p0 : Int) -> Unit {
       }
       @ffi.free(@ffi.load32(p0 + 4))
     }
+    _ => ()
   }
 }
