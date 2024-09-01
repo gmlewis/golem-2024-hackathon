@@ -1,3 +1,3 @@
 pub fn delete_user(_jwt : String) -> GetUserInfoResult {
-  abort("todo")
+  Error("delete_user not implemented yet")
 }

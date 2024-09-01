@@ -3,5 +3,5 @@ pub fn forwarded_get_tweet(
   _tweet_xid : String,
   _jwt : String
 ) -> SuccessOrFailureResult {
-  abort("todo")
+  Error("forwarded_get_tweet not implemented yet")
 }

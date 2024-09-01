@@ -4,5 +4,5 @@ pub fn forwarded_list_user_tweets(
   _limit : UInt,
   _jwt : String
 ) -> ListTweetsResult {
-  abort("todo")
+  Error("forwarded_list_user_tweets not implemented yet")
 }

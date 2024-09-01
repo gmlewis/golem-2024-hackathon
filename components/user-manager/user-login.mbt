@@ -7,5 +7,5 @@ pub fn user_login(
   _timestamp_millis : UInt64,
   _hmac_hash : String
 ) -> UserAuthResult {
-  abort("todo")
+  Error("user_login not implemented yet")
 }
