@@ -8,7 +8,7 @@ For details, see: https://www.golem.cloud/post/golem-1-0-hackathon-happens-on-au
 All commands can accept an optional '-debug' argument do show the equivalent
 `curl` command used to communicate with the Golem backend.
 
-### Register a new User Account :heavy_check_mark:
+### Register a new User Account
 
 HMAC-protected API endpoint: `POST /v1/users`
 
@@ -16,7 +16,7 @@ HMAC-protected API endpoint: `POST /v1/users`
 $ ./scripts/register-new-user.sh [-debug] -handle 'user-handle' -password 'password'
 ```
 
-### Get info about another user :heavy_check_mark:
+### Get info about another user
 
 JWT-protected API endpoint: `GET /v1/users/{user_handle}`
 
