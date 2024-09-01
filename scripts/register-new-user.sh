@@ -12,4 +12,5 @@ source ${REPO_DIR}/.env.development.local
 # go run ${REPO_DIR}/cmd/register-new-user/main.go -debug -handle "user-3" -password "${GOLEM_2024_HACKATHON_USER3_PASSWORD}"
 # go run ${REPO_DIR}/cmd/register-new-user/main.go -debug -handle "user-4" -password "${GOLEM_2024_HACKATHON_USER4_PASSWORD}"
 # go run ${REPO_DIR}/cmd/register-new-user/main.go -debug -handle "user-5" -password "${GOLEM_2024_HACKATHON_USER5_PASSWORD}"
-go run ${REPO_DIR}/cmd/register-new-user/main.go -debug -handle "user-6" -password "${GOLEM_2024_HACKATHON_USER6_PASSWORD}"
+# go run ${REPO_DIR}/cmd/register-new-user/main.go -debug -handle "user-6" -password "${GOLEM_2024_HACKATHON_USER6_PASSWORD}"
+go run ${REPO_DIR}/cmd/register-new-user/main.go -debug -handle "user-7" -password "${GOLEM_2024_HACKATHON_USER7_PASSWORD}"

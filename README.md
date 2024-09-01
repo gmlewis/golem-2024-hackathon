@@ -10,11 +10,15 @@ All commands can accept an optional '-debug' argument do show the equivalent
 
 ### Register a new User Account :heavy_check_mark:
 
+HMAC-protected API endpoint: `POST /v1/users`
+
 ```bash
 $ ./scripts/register-new-user.sh [-debug] -handle 'user-handle' -password 'password'
 ```
 
 ### Get info about another user :heavy_check_mark:
+
+JWT-protected API endpoint: `GET /v1/users/{user_handle}`
 
 ```bash
 $ ./scripts/get-user-info.sh [-debug] -user 'this-user-handle' -handle 'other-user-handle'
@@ -22,9 +26,13 @@ $ ./scripts/get-user-info.sh [-debug] -user 'this-user-handle' -handle 'other-us
 
 ### Follow/Unfollow another user
 
+JWT-protected API endpoint: `PUT /v1/follows`
+
 ```bash
 $ ./scripts/follow-user.sh [-debug] -user 'this-user-handle' -handle 'other-user-handle'
 ```
+
+JWT-protected API endpoint: `DELETE /v1/follows/{other_handle}`
 
 ```bash
 $ ./scripts/unfollow-user.sh [-debug] -user 'this-user-handle' -handle 'other-user-handle'
@@ -32,29 +40,39 @@ $ ./scripts/unfollow-user.sh [-debug] -user 'this-user-handle' -handle 'other-us
 
 ### Post a Tweet
 
+JWT-protected API endpoint: `POST /v1/timelines`
+
 ```bash
 $ ./scripts/post-tweet.sh [-debug] -user 'this-user-handle' 'Tweet contents'
 ```
 
-### Read Tweets chronologically from _all_ followed users
+### Read Tweets chronologically from _all_ followed users (most recent first)
+
+JWT-protected API endpoint: `GET /v1/timelines?before={timestamp}`
 
 ```bash
-$ ./scripts/read-all-timeline.sh [-debug] -user 'this-user-handle' [before-timestamp]
+$ ./scripts/read-all-timeline.sh [-debug] -user 'this-user-handle' -before [before-timestamp]
 ```
 
 ### Read Tweets chronologically from any individual user
 
+JWT-protected API endpoint: `GET /v1/timelines/{user_handle}?before={timestamp}`
+
 ```bash
-$ ./scripts/read-user-timeline.sh [-debug] -user 'this-user-handle' -handle 'other-user-handle' [before-timestamp]
+$ ./scripts/read-user-timeline.sh [-debug] -user 'this-user-handle' -handle 'other-user-handle' -before [before-timestamp]
 ```
 
 ### Update profile picture
+
+JWT-protected API endpoint: `PUT /v1/users/{user_handle}/profile-picture`
 
 ```bash
 $ ./scripts/update-profile-picture.sh [-debug] -user 'this-user-handle' -filename picture.jpg
 ```
 
 ### Delete a user account
+
+JWT-protected API endpoint: `DELETE /v1/users/{user_handle}`
 
 ```bash
 $ ./scripts/delete-user.sh [-debug] -user 'user-handle'
