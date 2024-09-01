@@ -8,7 +8,7 @@ pub fn list_user_tweets(
   for pair in all_tweets.val.iter() {
     let tweet_xid = pair.0
     let tweet_contents = pair.1
-    if tweet_xid.compare(before) >= 0 {
+    if before != "" && tweet_xid.compare(before) >= 0 {
       continue
     }
     tweets.push({ user_xid, tweet_contents, tweet_xid })

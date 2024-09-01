@@ -10,5 +10,7 @@ golem-cli worker invoke-and-await \
     --component-name "user" \
     --worker-name "user-1" \
     --function "golem:component/api.{post-tweet}" \
-    --arg "MoonBit programming is fun" \
-    --arg "${XID}"
+    --arg '"MoonBit programming is still fun"' \
+    --arg '"'${XID}'"'
+
+#     "golem:component/api.{post-tweet}(tweet-contents: string, tweet-xid: string) -> variant { error(string), success(string) }",
