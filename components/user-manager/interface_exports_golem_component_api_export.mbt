@@ -201,22 +201,30 @@ pub fn wasmExportUnfollowUserPostReturn(p0 : Int) -> Unit {
   }
 }
 
-pub fn wasmExportPostTweet(p0 : Int, p1 : Int, p2 : Int, p3 : Int) -> Int {
+pub fn wasmExportPostTweet(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int,
+  p5 : Int
+) -> Int {
   let result = @ffi.ptr2str(p0)
   let result0 = @ffi.ptr2str(p2)
-  let result1 : SuccessOrFailureResult = post_tweet(result, result0)
+  let result1 = @ffi.ptr2str(p4)
+  let result2 : SuccessOrFailureResult = post_tweet(result, result0, result1)
   let return_area = @ffi.malloc(12)
-  match result1 {
+  match result2 {
     Error(payload) => {
       @ffi.store8(return_area + 0, 0)
       @ffi.store32(return_area + 8, payload.iter().count())
       @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
       ()
     }
-    Success(payload4) => {
+    Success(payload5) => {
       @ffi.store8(return_area + 0, 1)
-      @ffi.store32(return_area + 8, payload4.iter().count())
-      @ffi.store32(return_area + 4, @ffi.str2ptr(payload4))
+      @ffi.store32(return_area + 8, payload5.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload5))
       ()
     }
     _ => panic()

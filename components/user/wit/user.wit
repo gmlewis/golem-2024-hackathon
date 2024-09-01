@@ -33,6 +33,7 @@ interface api {
 
   follow-user: func(
     other-user-xid: string,
+    other-user-worker: string,
     jwt: string) -> success-or-failure-result;
 
   unfollow-user: func(

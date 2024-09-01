@@ -1,5 +1,5 @@
 /// `all_follows` is a map of user XIDs that this user is following.
-/// Each key is the user XID and the value is currently unused.
+/// Each key is the user XID and the value identifies the `user` worker.
 /// This naturally de-dupes the user XIDs.
 let all_follows : Ref[Map[String, String]] = { val: {  } }
 
