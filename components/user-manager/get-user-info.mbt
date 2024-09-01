@@ -5,5 +5,9 @@ pub fn get_user_info(user_handle : String, jwt : String) -> GetUserInfoResult {
     Ok(_) => ()
     Err(s) => return Error(s)
   }
-  {  }
+  let user_info = match lookup_user_by_handle(user_handle) {
+    Ok(user_info) => user_info
+    Err(s) => return Error(s)
+  }
+  Success(user_info)
 }
