@@ -7,3 +7,203 @@
 /// Each user is created with a globally-unique XID such that in the future, it will
 /// be possible to change a user's public "@handle" easily (if the new handle is available)
 /// without the need for anything else changing in the backend.
+
+pub fn FutureFollowingResult::subscribe(
+  self : FutureFollowingResult
+) -> @poll.Pollable {
+  abort("todo")
+}
+
+pub fn FutureFollowingResult::get(
+  self : FutureFollowingResult
+) -> FollowingResult? {
+  abort("todo")
+}
+
+pub fn FutureFollowUserResult::subscribe(
+  self : FutureFollowUserResult
+) -> @poll.Pollable {
+  abort("todo")
+}
+
+pub fn FutureFollowUserResult::get(
+  self : FutureFollowUserResult
+) -> SuccessOrFailureResult? {
+  abort("todo")
+}
+
+pub fn FutureUnfollowUserResult::subscribe(
+  self : FutureUnfollowUserResult
+) -> @poll.Pollable {
+  abort("todo")
+}
+
+pub fn FutureUnfollowUserResult::get(
+  self : FutureUnfollowUserResult
+) -> SuccessOrFailureResult? {
+  abort("todo")
+}
+
+pub fn FuturePostTweetResult::subscribe(
+  self : FuturePostTweetResult
+) -> @poll.Pollable {
+  abort("todo")
+}
+
+pub fn FuturePostTweetResult::get(
+  self : FuturePostTweetResult
+) -> SuccessOrFailureResult? {
+  abort("todo")
+}
+
+pub fn FutureGetTweetResult::subscribe(
+  self : FutureGetTweetResult
+) -> @poll.Pollable {
+  abort("todo")
+}
+
+pub fn FutureGetTweetResult::get(
+  self : FutureGetTweetResult
+) -> SuccessOrFailureResult? {
+  abort("todo")
+}
+
+pub fn FutureListAllFollowedTweetsResult::subscribe(
+  self : FutureListAllFollowedTweetsResult
+) -> @poll.Pollable {
+  abort("todo")
+}
+
+pub fn FutureListAllFollowedTweetsResult::get(
+  self : FutureListAllFollowedTweetsResult
+) -> ListTweetsResult? {
+  abort("todo")
+}
+
+pub fn FutureListUserTweetsResult::subscribe(
+  self : FutureListUserTweetsResult
+) -> @poll.Pollable {
+  abort("todo")
+}
+
+pub fn FutureListUserTweetsResult::get(
+  self : FutureListUserTweetsResult
+) -> ListTweetsResult? {
+  abort("todo")
+}
+
+pub fn Api::api(location : @types.Uri) -> Api {
+  abort("todo")
+}
+
+pub fn Api::blocking_following(self : Api, jwt : String) -> FollowingResult {
+  abort("todo")
+}
+
+pub fn Api::rpc_following(self : Api, jwt : String) -> FutureFollowingResult {
+  abort("todo")
+}
+
+pub fn Api::blocking_follow_user(
+  self : Api,
+  other_user_xid : String,
+  other_user_worker : String,
+  jwt : String
+) -> SuccessOrFailureResult {
+  abort("todo")
+}
+
+pub fn Api::rpc_follow_user(
+  self : Api,
+  other_user_xid : String,
+  other_user_worker : String,
+  jwt : String
+) -> FutureFollowUserResult {
+  abort("todo")
+}
+
+pub fn Api::blocking_unfollow_user(
+  self : Api,
+  other_user_xid : String,
+  jwt : String
+) -> SuccessOrFailureResult {
+  abort("todo")
+}
+
+pub fn Api::rpc_unfollow_user(
+  self : Api,
+  other_user_xid : String,
+  jwt : String
+) -> FutureUnfollowUserResult {
+  abort("todo")
+}
+
+pub fn Api::blocking_post_tweet(
+  self : Api,
+  tweet_contents : String,
+  tweet_xid : String,
+  jwt : String
+) -> SuccessOrFailureResult {
+  abort("todo")
+}
+
+pub fn Api::rpc_post_tweet(
+  self : Api,
+  tweet_contents : String,
+  tweet_xid : String,
+  jwt : String
+) -> FuturePostTweetResult {
+  abort("todo")
+}
+
+pub fn Api::blocking_get_tweet(
+  self : Api,
+  tweet_xid : String,
+  jwt : String
+) -> SuccessOrFailureResult {
+  abort("todo")
+}
+
+pub fn Api::rpc_get_tweet(
+  self : Api,
+  tweet_xid : String,
+  jwt : String
+) -> FutureGetTweetResult {
+  abort("todo")
+}
+
+pub fn Api::blocking_list_all_followed_tweets(
+  self : Api,
+  before : String,
+  limit : UInt,
+  jwt : String
+) -> ListTweetsResult {
+  abort("todo")
+}
+
+pub fn Api::rpc_list_all_followed_tweets(
+  self : Api,
+  before : String,
+  limit : UInt,
+  jwt : String
+) -> FutureListAllFollowedTweetsResult {
+  abort("todo")
+}
+
+pub fn Api::blocking_list_user_tweets(
+  self : Api,
+  before : String,
+  limit : UInt,
+  jwt : String
+) -> ListTweetsResult {
+  abort("todo")
+}
+
+pub fn Api::rpc_list_user_tweets(
+  self : Api,
+  before : String,
+  limit : UInt,
+  jwt : String
+) -> FutureListUserTweetsResult {
+  abort("todo")
+}

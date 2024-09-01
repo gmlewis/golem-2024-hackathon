@@ -542,3 +542,895 @@ pub fn wasmExportUserLoginPostReturn(p0 : Int) -> Unit {
     }
   }
 }
+
+pub fn wasmExportMethodFutureFollowingResultSubscribe(p0 : Int) -> Int {
+  let result : @poll.Pollable = FutureFollowingResult::subscribe(
+    FutureFollowingResult::FutureFollowingResult(p0),
+  )
+  return result.0
+}
+
+pub fn wasmExportMethodFutureFollowingResultGet(p0 : Int) -> Int {
+  let result : FollowingResult? = FutureFollowingResult::get(
+    FutureFollowingResult::FutureFollowingResult(p0),
+  )
+  let return_area = @ffi.malloc(16)
+  match result {
+    None => {
+      @ffi.store8(return_area + 0, 0)
+      ()
+    }
+    Some(payload2) => {
+      @ffi.store8(return_area + 0, 1)
+      match payload2 {
+        Error(payload5) => {
+          @ffi.store8(return_area + 4, 0)
+          @ffi.store32(return_area + 12, payload5.iter().count())
+          @ffi.store32(return_area + 8, @ffi.str2ptr(payload5))
+          ()
+        }
+        Success(payload8) => {
+          @ffi.store8(return_area + 4, 1)
+          let address = @ffi.malloc(payload8.user_xids.length() * 8)
+          for index = 0; index < payload8.user_xids.length(); index = index + 1 {
+            let element9 : String = payload8.user_xids[index]
+            let base10 = address + index * 8
+            @ffi.store32(base10 + 4, element9.iter().count())
+            @ffi.store32(base10 + 0, @ffi.str2ptr(element9))
+          }
+          @ffi.store32(return_area + 12, payload8.user_xids.length())
+          @ffi.store32(return_area + 8, address)
+          ()
+        }
+        _ => panic()
+      }
+      ()
+    }
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodFutureFollowingResultGetPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => ()
+    1 =>
+      match @ffi.load8_u(p0 + 4) {
+        0 => @ffi.free(@ffi.load32(p0 + 8))
+        1 => {
+          for index = 0; index < @ffi.load32(p0 + 12); index = index + 1 {
+            let base7 = @ffi.load32(p0 + 8) + index * 8
+            @ffi.free(@ffi.load32(base7 + 0))
+          }
+          @ffi.free(@ffi.load32(p0 + 8))
+        }
+      }
+  }
+}
+
+pub fn wasmExportMethodFutureFollowUserResultSubscribe(p0 : Int) -> Int {
+  let result : @poll.Pollable = FutureFollowUserResult::subscribe(
+    FutureFollowUserResult::FutureFollowUserResult(p0),
+  )
+  return result.0
+}
+
+pub fn wasmExportMethodFutureFollowUserResultGet(p0 : Int) -> Int {
+  let result : SuccessOrFailureResult? = FutureFollowUserResult::get(
+    FutureFollowUserResult::FutureFollowUserResult(p0),
+  )
+  let return_area = @ffi.malloc(16)
+  match result {
+    None => {
+      @ffi.store8(return_area + 0, 0)
+      ()
+    }
+    Some(payload2) => {
+      @ffi.store8(return_area + 0, 1)
+      match payload2 {
+        Error(payload5) => {
+          @ffi.store8(return_area + 4, 0)
+          @ffi.store32(return_area + 12, payload5.iter().count())
+          @ffi.store32(return_area + 8, @ffi.str2ptr(payload5))
+          ()
+        }
+        Success(payload8) => {
+          @ffi.store8(return_area + 4, 1)
+          @ffi.store32(return_area + 12, payload8.iter().count())
+          @ffi.store32(return_area + 8, @ffi.str2ptr(payload8))
+          ()
+        }
+        _ => panic()
+      }
+      ()
+    }
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodFutureFollowUserResultGetPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => ()
+    1 =>
+      match @ffi.load8_u(p0 + 4) {
+        0 => @ffi.free(@ffi.load32(p0 + 8))
+        1 => @ffi.free(@ffi.load32(p0 + 8))
+      }
+  }
+}
+
+pub fn wasmExportMethodFutureUnfollowUserResultSubscribe(p0 : Int) -> Int {
+  let result : @poll.Pollable = FutureUnfollowUserResult::subscribe(
+    FutureUnfollowUserResult::FutureUnfollowUserResult(p0),
+  )
+  return result.0
+}
+
+pub fn wasmExportMethodFutureUnfollowUserResultGet(p0 : Int) -> Int {
+  let result : SuccessOrFailureResult? = FutureUnfollowUserResult::get(
+    FutureUnfollowUserResult::FutureUnfollowUserResult(p0),
+  )
+  let return_area = @ffi.malloc(16)
+  match result {
+    None => {
+      @ffi.store8(return_area + 0, 0)
+      ()
+    }
+    Some(payload2) => {
+      @ffi.store8(return_area + 0, 1)
+      match payload2 {
+        Error(payload5) => {
+          @ffi.store8(return_area + 4, 0)
+          @ffi.store32(return_area + 12, payload5.iter().count())
+          @ffi.store32(return_area + 8, @ffi.str2ptr(payload5))
+          ()
+        }
+        Success(payload8) => {
+          @ffi.store8(return_area + 4, 1)
+          @ffi.store32(return_area + 12, payload8.iter().count())
+          @ffi.store32(return_area + 8, @ffi.str2ptr(payload8))
+          ()
+        }
+        _ => panic()
+      }
+      ()
+    }
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodFutureUnfollowUserResultGetPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => ()
+    1 =>
+      match @ffi.load8_u(p0 + 4) {
+        0 => @ffi.free(@ffi.load32(p0 + 8))
+        1 => @ffi.free(@ffi.load32(p0 + 8))
+      }
+  }
+}
+
+pub fn wasmExportMethodFuturePostTweetResultSubscribe(p0 : Int) -> Int {
+  let result : @poll.Pollable = FuturePostTweetResult::subscribe(
+    FuturePostTweetResult::FuturePostTweetResult(p0),
+  )
+  return result.0
+}
+
+pub fn wasmExportMethodFuturePostTweetResultGet(p0 : Int) -> Int {
+  let result : SuccessOrFailureResult? = FuturePostTweetResult::get(
+    FuturePostTweetResult::FuturePostTweetResult(p0),
+  )
+  let return_area = @ffi.malloc(16)
+  match result {
+    None => {
+      @ffi.store8(return_area + 0, 0)
+      ()
+    }
+    Some(payload2) => {
+      @ffi.store8(return_area + 0, 1)
+      match payload2 {
+        Error(payload5) => {
+          @ffi.store8(return_area + 4, 0)
+          @ffi.store32(return_area + 12, payload5.iter().count())
+          @ffi.store32(return_area + 8, @ffi.str2ptr(payload5))
+          ()
+        }
+        Success(payload8) => {
+          @ffi.store8(return_area + 4, 1)
+          @ffi.store32(return_area + 12, payload8.iter().count())
+          @ffi.store32(return_area + 8, @ffi.str2ptr(payload8))
+          ()
+        }
+        _ => panic()
+      }
+      ()
+    }
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodFuturePostTweetResultGetPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => ()
+    1 =>
+      match @ffi.load8_u(p0 + 4) {
+        0 => @ffi.free(@ffi.load32(p0 + 8))
+        1 => @ffi.free(@ffi.load32(p0 + 8))
+      }
+  }
+}
+
+pub fn wasmExportMethodFutureGetTweetResultSubscribe(p0 : Int) -> Int {
+  let result : @poll.Pollable = FutureGetTweetResult::subscribe(
+    FutureGetTweetResult::FutureGetTweetResult(p0),
+  )
+  return result.0
+}
+
+pub fn wasmExportMethodFutureGetTweetResultGet(p0 : Int) -> Int {
+  let result : SuccessOrFailureResult? = FutureGetTweetResult::get(
+    FutureGetTweetResult::FutureGetTweetResult(p0),
+  )
+  let return_area = @ffi.malloc(16)
+  match result {
+    None => {
+      @ffi.store8(return_area + 0, 0)
+      ()
+    }
+    Some(payload2) => {
+      @ffi.store8(return_area + 0, 1)
+      match payload2 {
+        Error(payload5) => {
+          @ffi.store8(return_area + 4, 0)
+          @ffi.store32(return_area + 12, payload5.iter().count())
+          @ffi.store32(return_area + 8, @ffi.str2ptr(payload5))
+          ()
+        }
+        Success(payload8) => {
+          @ffi.store8(return_area + 4, 1)
+          @ffi.store32(return_area + 12, payload8.iter().count())
+          @ffi.store32(return_area + 8, @ffi.str2ptr(payload8))
+          ()
+        }
+        _ => panic()
+      }
+      ()
+    }
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodFutureGetTweetResultGetPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => ()
+    1 =>
+      match @ffi.load8_u(p0 + 4) {
+        0 => @ffi.free(@ffi.load32(p0 + 8))
+        1 => @ffi.free(@ffi.load32(p0 + 8))
+      }
+  }
+}
+
+pub fn wasmExportMethodFutureListAllFollowedTweetsResultSubscribe(
+  p0 : Int
+) -> Int {
+  let result : @poll.Pollable = FutureListAllFollowedTweetsResult::subscribe(
+    FutureListAllFollowedTweetsResult::FutureListAllFollowedTweetsResult(p0),
+  )
+  return result.0
+}
+
+pub fn wasmExportMethodFutureListAllFollowedTweetsResultGet(p0 : Int) -> Int {
+  let result : ListTweetsResult? = FutureListAllFollowedTweetsResult::get(
+    FutureListAllFollowedTweetsResult::FutureListAllFollowedTweetsResult(p0),
+  )
+  let return_area = @ffi.malloc(16)
+  match result {
+    None => {
+      @ffi.store8(return_area + 0, 0)
+      ()
+    }
+    Some(payload2) => {
+      @ffi.store8(return_area + 0, 1)
+      match payload2 {
+        Error(payload5) => {
+          @ffi.store8(return_area + 4, 0)
+          @ffi.store32(return_area + 12, payload5.iter().count())
+          @ffi.store32(return_area + 8, @ffi.str2ptr(payload5))
+          ()
+        }
+        Success(payload8) => {
+          @ffi.store8(return_area + 4, 1)
+          let address = @ffi.malloc(payload8.tweets.length() * 24)
+          for index = 0; index < payload8.tweets.length(); index = index + 1 {
+            let element9 : Tweet = payload8.tweets[index]
+            let base10 = address + index * 24
+            @ffi.store32(base10 + 4, element9.user_xid.iter().count())
+            @ffi.store32(base10 + 0, @ffi.str2ptr(element9.user_xid))
+            @ffi.store32(base10 + 12, element9.tweet_contents.iter().count())
+            @ffi.store32(base10 + 8, @ffi.str2ptr(element9.tweet_contents))
+            @ffi.store32(base10 + 20, element9.tweet_xid.iter().count())
+            @ffi.store32(base10 + 16, @ffi.str2ptr(element9.tweet_xid))
+          }
+          @ffi.store32(return_area + 12, payload8.tweets.length())
+          @ffi.store32(return_area + 8, address)
+          ()
+        }
+        _ => panic()
+      }
+      ()
+    }
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodFutureListAllFollowedTweetsResultGetPostReturn(
+  p0 : Int
+) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => ()
+    1 =>
+      match @ffi.load8_u(p0 + 4) {
+        0 => @ffi.free(@ffi.load32(p0 + 8))
+        1 => {
+          for index = 0; index < @ffi.load32(p0 + 12); index = index + 1 {
+            let base7 = @ffi.load32(p0 + 8) + index * 24
+            @ffi.free(@ffi.load32(base7 + 0))
+            @ffi.free(@ffi.load32(base7 + 8))
+            @ffi.free(@ffi.load32(base7 + 16))
+          }
+          @ffi.free(@ffi.load32(p0 + 8))
+        }
+      }
+  }
+}
+
+pub fn wasmExportMethodFutureListUserTweetsResultSubscribe(p0 : Int) -> Int {
+  let result : @poll.Pollable = FutureListUserTweetsResult::subscribe(
+    FutureListUserTweetsResult::FutureListUserTweetsResult(p0),
+  )
+  return result.0
+}
+
+pub fn wasmExportMethodFutureListUserTweetsResultGet(p0 : Int) -> Int {
+  let result : ListTweetsResult? = FutureListUserTweetsResult::get(
+    FutureListUserTweetsResult::FutureListUserTweetsResult(p0),
+  )
+  let return_area = @ffi.malloc(16)
+  match result {
+    None => {
+      @ffi.store8(return_area + 0, 0)
+      ()
+    }
+    Some(payload2) => {
+      @ffi.store8(return_area + 0, 1)
+      match payload2 {
+        Error(payload5) => {
+          @ffi.store8(return_area + 4, 0)
+          @ffi.store32(return_area + 12, payload5.iter().count())
+          @ffi.store32(return_area + 8, @ffi.str2ptr(payload5))
+          ()
+        }
+        Success(payload8) => {
+          @ffi.store8(return_area + 4, 1)
+          let address = @ffi.malloc(payload8.tweets.length() * 24)
+          for index = 0; index < payload8.tweets.length(); index = index + 1 {
+            let element9 : Tweet = payload8.tweets[index]
+            let base10 = address + index * 24
+            @ffi.store32(base10 + 4, element9.user_xid.iter().count())
+            @ffi.store32(base10 + 0, @ffi.str2ptr(element9.user_xid))
+            @ffi.store32(base10 + 12, element9.tweet_contents.iter().count())
+            @ffi.store32(base10 + 8, @ffi.str2ptr(element9.tweet_contents))
+            @ffi.store32(base10 + 20, element9.tweet_xid.iter().count())
+            @ffi.store32(base10 + 16, @ffi.str2ptr(element9.tweet_xid))
+          }
+          @ffi.store32(return_area + 12, payload8.tweets.length())
+          @ffi.store32(return_area + 8, address)
+          ()
+        }
+        _ => panic()
+      }
+      ()
+    }
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodFutureListUserTweetsResultGetPostReturn(
+  p0 : Int
+) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => ()
+    1 =>
+      match @ffi.load8_u(p0 + 4) {
+        0 => @ffi.free(@ffi.load32(p0 + 8))
+        1 => {
+          for index = 0; index < @ffi.load32(p0 + 12); index = index + 1 {
+            let base7 = @ffi.load32(p0 + 8) + index * 24
+            @ffi.free(@ffi.load32(base7 + 0))
+            @ffi.free(@ffi.load32(base7 + 8))
+            @ffi.free(@ffi.load32(base7 + 16))
+          }
+          @ffi.free(@ffi.load32(p0 + 8))
+        }
+      }
+  }
+}
+
+pub fn wasmExportConstructorApi(p0 : Int, p1 : Int) -> Int {
+  let result = @ffi.ptr2str(p0)
+  let result0 : Api = Api::api(@types.Uri::{ value: result })
+  return result0.0
+}
+
+pub fn wasmExportMethodApiBlockingFollowing(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 : FollowingResult = Api::blocking_following(Api::Api(p0), result)
+  let return_area = @ffi.malloc(12)
+  match result0 {
+    Error(payload) => {
+      @ffi.store8(return_area + 0, 0)
+      @ffi.store32(return_area + 8, payload.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
+      ()
+    }
+    Success(payload3) => {
+      @ffi.store8(return_area + 0, 1)
+      let address = @ffi.malloc(payload3.user_xids.length() * 8)
+      for index = 0; index < payload3.user_xids.length(); index = index + 1 {
+        let element4 : String = payload3.user_xids[index]
+        let base5 = address + index * 8
+        @ffi.store32(base5 + 4, element4.iter().count())
+        @ffi.store32(base5 + 0, @ffi.str2ptr(element4))
+      }
+      @ffi.store32(return_area + 8, payload3.user_xids.length())
+      @ffi.store32(return_area + 4, address)
+      ()
+    }
+    _ => panic()
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodApiBlockingFollowingPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => @ffi.free(@ffi.load32(p0 + 4))
+    1 => {
+      for index = 0; index < @ffi.load32(p0 + 8); index = index + 1 {
+        let base3 = @ffi.load32(p0 + 4) + index * 8
+        @ffi.free(@ffi.load32(base3 + 0))
+      }
+      @ffi.free(@ffi.load32(p0 + 4))
+    }
+  }
+}
+
+pub fn wasmExportMethodApiFollowing(p0 : Int, p1 : Int, p2 : Int) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 : FutureFollowingResult = Api::following(Api::Api(p0), result)
+  return result0.0
+}
+
+pub fn wasmExportMethodApiBlockingFollowUser(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int,
+  p5 : Int,
+  p6 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p3)
+  let result1 = @ffi.ptr2str(p5)
+  let result2 : SuccessOrFailureResult = Api::blocking_follow_user(
+    Api::Api(p0),
+    result,
+    result0,
+    result1,
+  )
+  let return_area = @ffi.malloc(12)
+  match result2 {
+    Error(payload) => {
+      @ffi.store8(return_area + 0, 0)
+      @ffi.store32(return_area + 8, payload.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
+      ()
+    }
+    Success(payload5) => {
+      @ffi.store8(return_area + 0, 1)
+      @ffi.store32(return_area + 8, payload5.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload5))
+      ()
+    }
+    _ => panic()
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodApiBlockingFollowUserPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => @ffi.free(@ffi.load32(p0 + 4))
+    1 => @ffi.free(@ffi.load32(p0 + 4))
+  }
+}
+
+pub fn wasmExportMethodApiFollowUser(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int,
+  p5 : Int,
+  p6 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p3)
+  let result1 = @ffi.ptr2str(p5)
+  let result2 : FutureFollowUserResult = Api::follow_user(
+    Api::Api(p0),
+    result,
+    result0,
+    result1,
+  )
+  return result2.0
+}
+
+pub fn wasmExportMethodApiBlockingUnfollowUser(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p3)
+  let result1 : SuccessOrFailureResult = Api::blocking_unfollow_user(
+    Api::Api(p0),
+    result,
+    result0,
+  )
+  let return_area = @ffi.malloc(12)
+  match result1 {
+    Error(payload) => {
+      @ffi.store8(return_area + 0, 0)
+      @ffi.store32(return_area + 8, payload.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
+      ()
+    }
+    Success(payload4) => {
+      @ffi.store8(return_area + 0, 1)
+      @ffi.store32(return_area + 8, payload4.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload4))
+      ()
+    }
+    _ => panic()
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodApiBlockingUnfollowUserPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => @ffi.free(@ffi.load32(p0 + 4))
+    1 => @ffi.free(@ffi.load32(p0 + 4))
+  }
+}
+
+pub fn wasmExportMethodApiUnfollowUser(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p3)
+  let result1 : FutureUnfollowUserResult = Api::unfollow_user(
+    Api::Api(p0),
+    result,
+    result0,
+  )
+  return result1.0
+}
+
+pub fn wasmExportMethodApiBlockingPostTweet(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int,
+  p5 : Int,
+  p6 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p3)
+  let result1 = @ffi.ptr2str(p5)
+  let result2 : SuccessOrFailureResult = Api::blocking_post_tweet(
+    Api::Api(p0),
+    result,
+    result0,
+    result1,
+  )
+  let return_area = @ffi.malloc(12)
+  match result2 {
+    Error(payload) => {
+      @ffi.store8(return_area + 0, 0)
+      @ffi.store32(return_area + 8, payload.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
+      ()
+    }
+    Success(payload5) => {
+      @ffi.store8(return_area + 0, 1)
+      @ffi.store32(return_area + 8, payload5.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload5))
+      ()
+    }
+    _ => panic()
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodApiBlockingPostTweetPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => @ffi.free(@ffi.load32(p0 + 4))
+    1 => @ffi.free(@ffi.load32(p0 + 4))
+  }
+}
+
+pub fn wasmExportMethodApiPostTweet(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int,
+  p5 : Int,
+  p6 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p3)
+  let result1 = @ffi.ptr2str(p5)
+  let result2 : FuturePostTweetResult = Api::post_tweet(
+    Api::Api(p0),
+    result,
+    result0,
+    result1,
+  )
+  return result2.0
+}
+
+pub fn wasmExportMethodApiBlockingGetTweet(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p3)
+  let result1 : SuccessOrFailureResult = Api::blocking_get_tweet(
+    Api::Api(p0),
+    result,
+    result0,
+  )
+  let return_area = @ffi.malloc(12)
+  match result1 {
+    Error(payload) => {
+      @ffi.store8(return_area + 0, 0)
+      @ffi.store32(return_area + 8, payload.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
+      ()
+    }
+    Success(payload4) => {
+      @ffi.store8(return_area + 0, 1)
+      @ffi.store32(return_area + 8, payload4.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload4))
+      ()
+    }
+    _ => panic()
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodApiBlockingGetTweetPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => @ffi.free(@ffi.load32(p0 + 4))
+    1 => @ffi.free(@ffi.load32(p0 + 4))
+  }
+}
+
+pub fn wasmExportMethodApiGetTweet(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p3)
+  let result1 : FutureGetTweetResult = Api::get_tweet(
+    Api::Api(p0),
+    result,
+    result0,
+  )
+  return result1.0
+}
+
+pub fn wasmExportMethodApiBlockingListAllFollowedTweets(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int,
+  p5 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p4)
+  let result1 : ListTweetsResult = Api::blocking_list_all_followed_tweets(
+    Api::Api(p0),
+    result,
+    p3.to_uint(),
+    result0,
+  )
+  let return_area = @ffi.malloc(12)
+  match result1 {
+    Error(payload) => {
+      @ffi.store8(return_area + 0, 0)
+      @ffi.store32(return_area + 8, payload.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
+      ()
+    }
+    Success(payload4) => {
+      @ffi.store8(return_area + 0, 1)
+      let address = @ffi.malloc(payload4.tweets.length() * 24)
+      for index = 0; index < payload4.tweets.length(); index = index + 1 {
+        let element5 : Tweet = payload4.tweets[index]
+        let base6 = address + index * 24
+        @ffi.store32(base6 + 4, element5.user_xid.iter().count())
+        @ffi.store32(base6 + 0, @ffi.str2ptr(element5.user_xid))
+        @ffi.store32(base6 + 12, element5.tweet_contents.iter().count())
+        @ffi.store32(base6 + 8, @ffi.str2ptr(element5.tweet_contents))
+        @ffi.store32(base6 + 20, element5.tweet_xid.iter().count())
+        @ffi.store32(base6 + 16, @ffi.str2ptr(element5.tweet_xid))
+      }
+      @ffi.store32(return_area + 8, payload4.tweets.length())
+      @ffi.store32(return_area + 4, address)
+      ()
+    }
+    _ => panic()
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodApiBlockingListAllFollowedTweetsPostReturn(
+  p0 : Int
+) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => @ffi.free(@ffi.load32(p0 + 4))
+    1 => {
+      for index = 0; index < @ffi.load32(p0 + 8); index = index + 1 {
+        let base3 = @ffi.load32(p0 + 4) + index * 24
+        @ffi.free(@ffi.load32(base3 + 0))
+        @ffi.free(@ffi.load32(base3 + 8))
+        @ffi.free(@ffi.load32(base3 + 16))
+      }
+      @ffi.free(@ffi.load32(p0 + 4))
+    }
+  }
+}
+
+pub fn wasmExportMethodApiListAllFollowedTweets(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int,
+  p5 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p4)
+  let result1 : FutureListAllFollowedTweetsResult = Api::list_all_followed_tweets(
+    Api::Api(p0),
+    result,
+    p3.to_uint(),
+    result0,
+  )
+  return result1.0
+}
+
+pub fn wasmExportMethodApiBlockingListUserTweets(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int,
+  p5 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p4)
+  let result1 : ListTweetsResult = Api::blocking_list_user_tweets(
+    Api::Api(p0),
+    result,
+    p3.to_uint(),
+    result0,
+  )
+  let return_area = @ffi.malloc(12)
+  match result1 {
+    Error(payload) => {
+      @ffi.store8(return_area + 0, 0)
+      @ffi.store32(return_area + 8, payload.iter().count())
+      @ffi.store32(return_area + 4, @ffi.str2ptr(payload))
+      ()
+    }
+    Success(payload4) => {
+      @ffi.store8(return_area + 0, 1)
+      let address = @ffi.malloc(payload4.tweets.length() * 24)
+      for index = 0; index < payload4.tweets.length(); index = index + 1 {
+        let element5 : Tweet = payload4.tweets[index]
+        let base6 = address + index * 24
+        @ffi.store32(base6 + 4, element5.user_xid.iter().count())
+        @ffi.store32(base6 + 0, @ffi.str2ptr(element5.user_xid))
+        @ffi.store32(base6 + 12, element5.tweet_contents.iter().count())
+        @ffi.store32(base6 + 8, @ffi.str2ptr(element5.tweet_contents))
+        @ffi.store32(base6 + 20, element5.tweet_xid.iter().count())
+        @ffi.store32(base6 + 16, @ffi.str2ptr(element5.tweet_xid))
+      }
+      @ffi.store32(return_area + 8, payload4.tweets.length())
+      @ffi.store32(return_area + 4, address)
+      ()
+    }
+    _ => panic()
+  }
+  @ffi.free(return_area)
+  return return_area
+}
+
+pub fn wasmExportMethodApiBlockingListUserTweetsPostReturn(p0 : Int) -> Unit {
+  match @ffi.load8_u(p0 + 0) {
+    0 => @ffi.free(@ffi.load32(p0 + 4))
+    1 => {
+      for index = 0; index < @ffi.load32(p0 + 8); index = index + 1 {
+        let base3 = @ffi.load32(p0 + 4) + index * 24
+        @ffi.free(@ffi.load32(base3 + 0))
+        @ffi.free(@ffi.load32(base3 + 8))
+        @ffi.free(@ffi.load32(base3 + 16))
+      }
+      @ffi.free(@ffi.load32(p0 + 4))
+    }
+  }
+}
+
+pub fn wasmExportMethodApiListUserTweets(
+  p0 : Int,
+  p1 : Int,
+  p2 : Int,
+  p3 : Int,
+  p4 : Int,
+  p5 : Int
+) -> Int {
+  let result = @ffi.ptr2str(p1)
+  let result0 = @ffi.ptr2str(p4)
+  let result1 : FutureListUserTweetsResult = Api::list_user_tweets(
+    Api::Api(p0),
+    result,
+    p3.to_uint(),
+    result0,
+  )
+  return result1.0
+}

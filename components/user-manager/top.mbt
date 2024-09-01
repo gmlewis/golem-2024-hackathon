@@ -51,3 +51,77 @@ pub enum UserAuthResult {
   Error(String)
   Success(UserAuthInfo)
 } derive(Show, Eq)
+
+/// use golem:component/api.{list-following};
+/// use golem:component/api.{tweet};
+/// use golem:component/api.{list-tweets};
+/// use golem:component/api.{following-result};
+/// use golem:component/api.{list-tweets-result};
+/// use golem:component/api.{success-or-failure-result};
+pub type FutureFollowingResult Int derive(Show, Eq)
+
+fn wasmImportResourceDropFutureFollowingResult(resource : Int) = "golem:component/api" "[resource-drop]future-following-result"
+
+pub fn FutureFollowingResult::drop(self : FutureFollowingResult) -> Unit {
+  wasmImportResourceDropFutureFollowingResult(self.0)
+}
+
+pub type FutureFollowUserResult Int derive(Show, Eq)
+
+fn wasmImportResourceDropFutureFollowUserResult(resource : Int) = "golem:component/api" "[resource-drop]future-follow-user-result"
+
+pub fn FutureFollowUserResult::drop(self : FutureFollowUserResult) -> Unit {
+  wasmImportResourceDropFutureFollowUserResult(self.0)
+}
+
+pub type FutureUnfollowUserResult Int derive(Show, Eq)
+
+fn wasmImportResourceDropFutureUnfollowUserResult(resource : Int) = "golem:component/api" "[resource-drop]future-unfollow-user-result"
+
+pub fn FutureUnfollowUserResult::drop(self : FutureUnfollowUserResult) -> Unit {
+  wasmImportResourceDropFutureUnfollowUserResult(self.0)
+}
+
+pub type FuturePostTweetResult Int derive(Show, Eq)
+
+fn wasmImportResourceDropFuturePostTweetResult(resource : Int) = "golem:component/api" "[resource-drop]future-post-tweet-result"
+
+pub fn FuturePostTweetResult::drop(self : FuturePostTweetResult) -> Unit {
+  wasmImportResourceDropFuturePostTweetResult(self.0)
+}
+
+pub type FutureGetTweetResult Int derive(Show, Eq)
+
+fn wasmImportResourceDropFutureGetTweetResult(resource : Int) = "golem:component/api" "[resource-drop]future-get-tweet-result"
+
+pub fn FutureGetTweetResult::drop(self : FutureGetTweetResult) -> Unit {
+  wasmImportResourceDropFutureGetTweetResult(self.0)
+}
+
+pub type FutureListAllFollowedTweetsResult Int derive(Show, Eq)
+
+fn wasmImportResourceDropFutureListAllFollowedTweetsResult(resource : Int) = "golem:component/api" "[resource-drop]future-list-all-followed-tweets-result"
+
+pub fn FutureListAllFollowedTweetsResult::drop(
+  self : FutureListAllFollowedTweetsResult
+) -> Unit {
+  wasmImportResourceDropFutureListAllFollowedTweetsResult(self.0)
+}
+
+pub type FutureListUserTweetsResult Int derive(Show, Eq)
+
+fn wasmImportResourceDropFutureListUserTweetsResult(resource : Int) = "golem:component/api" "[resource-drop]future-list-user-tweets-result"
+
+pub fn FutureListUserTweetsResult::drop(
+  self : FutureListUserTweetsResult
+) -> Unit {
+  wasmImportResourceDropFutureListUserTweetsResult(self.0)
+}
+
+pub type Api Int derive(Show, Eq)
+
+fn wasmImportResourceDropApi(resource : Int) = "golem:component/api" "[resource-drop]api"
+
+pub fn Api::drop(self : Api) -> Unit {
+  wasmImportResourceDropApi(self.0)
+}

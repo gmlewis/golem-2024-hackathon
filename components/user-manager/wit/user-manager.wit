@@ -123,12 +123,12 @@ interface api {
 
   use golem:rpc/types@0.1.0.{uri as golem-rpc-uri};
   use wasi:io/poll@0.2.0.{pollable as wasi-io-pollable};
-  use golem:component/api.{list-following};
-  use golem:component/api.{tweet};
-  use golem:component/api.{list-tweets};
-  use golem:component/api.{following-result};
-  use golem:component/api.{list-tweets-result};
-  use golem:component/api.{success-or-failure-result};
+  // use golem:component/api.{list-following};
+  // use golem:component/api.{tweet};
+  // use golem:component/api.{list-tweets};
+  // use golem:component/api.{following-result};
+  // use golem:component/api.{list-tweets-result};
+  // use golem:component/api.{success-or-failure-result};
 
   resource future-following-result {
     subscribe: func() -> wasi-io-pollable;
