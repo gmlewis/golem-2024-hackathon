@@ -22,4 +22,4 @@ go run ${REPO_DIR}/cmd/register-new-user/main.go -debug -handle "user-7" -passwo
 # ./golem-add-user-worker.sh "user-4"
 # ./golem-add-user-worker.sh "user-5"
 # ./golem-add-user-worker.sh "user-6"
-./golem-add-user-worker.sh "user-7"
+# ./golem-add-user-worker.sh "user-7"

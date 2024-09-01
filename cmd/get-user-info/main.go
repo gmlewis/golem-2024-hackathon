@@ -65,6 +65,7 @@ func main() {
 	// TODO: put back the "Bearer " prefix.
 	// req.Header.Set("Authorization", fmt.Sprintf("Bearer %v", jwt))
 	req.Header.Set("Authorization", jwt)
+	req.Header.Set("Accept", "application/json")
 
 	resp, err := c.Do(req)
 	must(err)

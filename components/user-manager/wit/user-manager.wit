@@ -11,6 +11,7 @@ interface api {
     base64-profile-jpg: string,
     user-handle: string,
     user-xid: string,
+    worker-urn: string,
   }
 
   record following-result {

@@ -13,8 +13,13 @@ pub fn update_profile_picture(
     Ok(user_info) => user_info
     Err(s) => return Error(s)
   }
+  // temporarily hard-code the worker URNs:
+  let worker_urn = "urn:worker:c70bde8a-8824-43b5-896d-eb1be94aef6d/\{user_handle}"
   // update the profile picture
   let user_xid = user_info.user_xid
-  all_users.val.set(user_xid, { base64_profile_jpg, user_handle, user_xid })
+  all_users.val.set(
+    user_xid,
+    { base64_profile_jpg, user_handle, user_xid, worker_urn },
+  )
   Success("profile updated for \{user_xid}")
 }

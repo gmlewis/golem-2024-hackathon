@@ -9,6 +9,7 @@ pub struct UserInfo {
   base64_profile_jpg : String
   user_handle : String
   user_xid : String
+  worker_urn : String
 } derive(Show, Eq)
 
 pub struct FollowingResult {
