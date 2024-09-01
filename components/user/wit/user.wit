@@ -53,7 +53,7 @@ interface api {
     limit: u32,
     jwt: string) -> list-tweets-result;
 
-  list-tweets: func(
+  list-user-tweets: func(
     before: string,
     limit: u32,
     jwt: string) -> list-tweets-result;

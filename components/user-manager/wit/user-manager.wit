@@ -13,10 +13,29 @@ interface api {
     user-xid: string,
   }
 
+  record following-result {
+    user-xids: list<string>,
+  }
+
+  record tweet {
+    user-xid: string,
+    tweet-contents: string,
+    tweet-xid: string,
+  }
+
+  record list-tweets {
+    tweets: list<tweet>,
+  }
+
   // variants
   variant get-user-info-result {
     error(string),
     success(user-info),
+  }
+
+  variant list-tweets-result {
+    error(string),
+    success(list-tweets),
   }
 
   variant success-or-failure-result {
