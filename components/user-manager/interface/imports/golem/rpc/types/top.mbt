@@ -208,7 +208,7 @@ pub fn WasmRpc::invoke_and_await(
               }
               ()
             }
-            _ => panic()
+            // _ => panic()
           }
           ()
         }
@@ -287,7 +287,7 @@ pub fn WasmRpc::invoke_and_await(
           ignoreList.push(payload110.0.value)
           ()
         }
-        _ => panic()
+        // _ => panic()
       }
     }
     @ffi.store32(base + 4, element.nodes.length())
@@ -601,7 +601,7 @@ pub fn WasmRpc::invoke(
               }
               ()
             }
-            _ => panic()
+            // _ => panic()
           }
           ()
         }
@@ -680,7 +680,7 @@ pub fn WasmRpc::invoke(
           ignoreList.push(payload110.0.value)
           ()
         }
-        _ => panic()
+        // _ => panic()
       }
     }
     @ffi.store32(base + 4, element.nodes.length())
@@ -875,7 +875,7 @@ pub fn WasmRpc::async_invoke_and_await(
               }
               ()
             }
-            _ => panic()
+            // _ => panic()
           }
           ()
         }
@@ -954,7 +954,7 @@ pub fn WasmRpc::async_invoke_and_await(
           ignoreList.push(payload110.0.value)
           ()
         }
-        _ => panic()
+        // _ => panic()
       }
     }
     @ffi.store32(base + 4, element.nodes.length())

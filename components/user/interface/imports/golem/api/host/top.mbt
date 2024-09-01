@@ -269,7 +269,7 @@ pub fn GetWorkers::get_workers(
               ignoreList.push(payload21.value)
               ()
             }
-            _ => panic()
+            // _ => panic()
           }
         }
         @ffi.store32(base4 + 4, element3.filters.length())
@@ -517,7 +517,7 @@ pub fn set_oplog_persistence_level(
     PersistNothing => 0
     PersistRemoteSideEffects => 1
     Smart => 2
-    _ => panic()
+    // _ => panic()
   }
   wasmImportSetOplogPersistenceLevel(lowered)
 }
