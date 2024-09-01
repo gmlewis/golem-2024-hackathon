@@ -9,12 +9,14 @@
 package main
 
 import (
+	"encoding/base64"
 	"flag"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"net/url"
+	"strings"
 
 	"github.com/gmlewis/go-httpdebug/httpdebug"
 	"github.com/gmlewis/golem-2024-hackathon/common"
@@ -61,6 +63,15 @@ func main() {
 
 	jwt, err := common.GenUserJWT(*thisUser, *thisXID, privateKey)
 	must(err)
+
+	// debug
+	parts := strings.Split(jwt, ".")
+	alg, err := base64.RawStdEncoding.DecodeString(parts[0])
+	must(err)
+	log.Printf("alg:\n%s", alg)
+	payload, err := base64.RawStdEncoding.DecodeString(parts[1])
+	must(err)
+	log.Printf("payload:\n%s", payload)
 
 	// TODO: put back the "Bearer " prefix.
 	// req.Header.Set("Authorization", fmt.Sprintf("Bearer %v", jwt))
