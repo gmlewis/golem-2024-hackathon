@@ -5,5 +5,5 @@ let all_follows : Ref[Map[String, String]] = { val: {  } }
 
 pub fn following(jwt : String) -> FollowingResult {
   let user_xids = all_follows.val.keys().collect()
-  { user_xids, }
+  Success({ user_xids, })
 }
