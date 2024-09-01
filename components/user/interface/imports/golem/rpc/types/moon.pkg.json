@@ -1,12 +1,1 @@
-{
-  "import": [
-    {
-      "path": "gmlewis/golem-2024-hackathon/components/user/ffi",
-      "alias": "ffi"
-    },
-    {
-      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll",
-      "alias": "poll"
-    }
-  ]
-}
+{ "import": [{ "path" : "golem/component/ffi", "alias" : "ffi" }, { "path" : "golem/component/interface/imports/wasi/io/poll", "alias" : "poll" }] }

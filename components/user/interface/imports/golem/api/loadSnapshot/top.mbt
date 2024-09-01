@@ -2,17 +2,26 @@
 /// Tries to load a user-defined snapshot, setting up the worker's state based on it.
 /// The function can return with a failure to indicate that the update is not possible.
 pub fn load(bytes : Bytes) -> Result[Unit, String] {
-  let return_area = @ffi.malloc(12)
-  wasmImportLoad(@ffi.bytes2ptr(bytes), bytes.length(), return_area)
-  let lifted = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(())
-    1 => {
-      let result = @ffi.ptr2str(@ffi.load32(return_area + 4))
-      Result::Err(result)
-    }
-    _ => panic()
-  }
-  ignore(bytes)
-  @ffi.free(return_area)
-  return lifted
+
+      let return_area = @ffi.malloc(12)
+      wasmImportLoad(@ffi.bytes2ptr(bytes), bytes.length(), return_area);
+
+      let lifted = match (@ffi.load8_u((return_area) + 0)) {
+            0 => {
+
+                  Result::Ok(())
+            }
+            1 => {
+
+                  let result = @ffi.ptr2str(@ffi.load32((return_area) + 4))
+
+                  Result::Err(result)
+            }
+            _ => panic()
+      }
+      ignore(bytes)
+      @ffi.free(return_area)
+      return lifted
+
 }
+

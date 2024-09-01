@@ -1,0 +1,11 @@
+
+{
+      "link": {
+            "wasm": {
+                  "exports": ["cabi_realloc:cabi_realloc", "wasmExportFollowUser:golem:component/api#follow-user", "wasmExportFollowUserPostReturn:cabi_post_golem:component/api#follow-user", "wasmExportFollowing:golem:component/api#following", "wasmExportFollowingPostReturn:cabi_post_golem:component/api#following", "wasmExportGetTweet:golem:component/api#get-tweet", "wasmExportGetTweetPostReturn:cabi_post_golem:component/api#get-tweet", "wasmExportListAllFollowedTweets:golem:component/api#list-all-followed-tweets", "wasmExportListAllFollowedTweetsPostReturn:cabi_post_golem:component/api#list-all-followed-tweets", "wasmExportListUserTweets:golem:component/api#list-user-tweets", "wasmExportListUserTweetsPostReturn:cabi_post_golem:component/api#list-user-tweets", "wasmExportPostTweet:golem:component/api#post-tweet", "wasmExportPostTweetPostReturn:cabi_post_golem:component/api#post-tweet", "wasmExportUnfollowUser:golem:component/api#unfollow-user", "wasmExportUnfollowUserPostReturn:cabi_post_golem:component/api#unfollow-user"],
+                  "export-memory-name": "memory",
+                  "heap-start-address": 16
+            }
+      }
+      ,"import": [{ "path" : "golem/component/ffi", "alias" : "ffi" }, { "path" : "golem/component/interface/exports/golem/component/api", "alias" : "api" }]
+}

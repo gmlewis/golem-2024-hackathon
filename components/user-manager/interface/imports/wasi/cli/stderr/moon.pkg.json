@@ -1,0 +1,1 @@
+{ "import": [{ "path" : "golem/component/ffi", "alias" : "ffi" }, { "path" : "golem/component/interface/imports/wasi/io/streams", "alias" : "streams" }] }

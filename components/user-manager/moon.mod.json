@@ -1,0 +1,7 @@
+{
+  "name": "golem/component",
+  "deps": {
+    "gmlewis/base64": "0.5.0",
+    "gmlewis/spin-moonbit-sdk": "0.35.0"
+  }
+}
