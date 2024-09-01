@@ -14,7 +14,7 @@ All commands can accept an optional '-debug' argument do show the equivalent
 $ ./scripts/register-new-user.sh [-debug] -handle 'user-handle' -password 'password'
 ```
 
-### Get info about another user
+### Get info about another user :heavy_check_mark:
 
 ```bash
 $ ./scripts/get-user-info.sh [-debug] -user 'this-user-handle' -handle 'other-user-handle'
@@ -23,41 +23,41 @@ $ ./scripts/get-user-info.sh [-debug] -user 'this-user-handle' -handle 'other-us
 ### Follow/Unfollow another user
 
 ```bash
-$ ./scripts/follow-user.sh 'this-user-handle' 'other-user-handle'
+$ ./scripts/follow-user.sh [-debug] -user 'this-user-handle' -handle 'other-user-handle'
 ```
 
 ```bash
-$ ./scripts/unfollow-user.sh 'this-user-handle' 'other-user-handle'
+$ ./scripts/unfollow-user.sh [-debug] -user 'this-user-handle' -handle 'other-user-handle'
 ```
 
 ### Post a Tweet
 
 ```bash
-$ ./scripts/post-tweet.sh 'this-user-handle' 'Tweet contents'
+$ ./scripts/post-tweet.sh [-debug] -user 'this-user-handle' 'Tweet contents'
 ```
 
 ### Read Tweets chronologically from _all_ followed users
 
 ```bash
-$ ./scripts/read-all-timeline.sh 'this-user-handle' [before-timestamp]
+$ ./scripts/read-all-timeline.sh [-debug] -user 'this-user-handle' [before-timestamp]
 ```
 
 ### Read Tweets chronologically from any individual user
 
 ```bash
-$ ./scripts/read-user-timeline.sh 'this-user-handle' 'other-user-handle' [before-timestamp]
+$ ./scripts/read-user-timeline.sh [-debug] -user 'this-user-handle' -handle 'other-user-handle' [before-timestamp]
 ```
 
 ### Update profile picture
 
 ```bash
-$ ./scripts/update-profile-picture.sh 'this-user-handle' picture.jpg
+$ ./scripts/update-profile-picture.sh [-debug] -user 'this-user-handle' -filename picture.jpg
 ```
 
 ### Delete a user account
 
 ```bash
-$ ./scripts/delete-user.sh 'user-handle'
+$ ./scripts/delete-user.sh [-debug] -user 'user-handle'
 ```
 
 ## Running locally

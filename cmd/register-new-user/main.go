@@ -52,7 +52,7 @@ func main() {
 	userXID, err := xids.New("User")
 	must(err)
 
-	url := fmt.Sprintf("%v/v1/register-new-user", baseURL)
+	url := fmt.Sprintf("%v/v1/users", baseURL)
 	timestampMillis := time.Now().UnixMilli()
 	messageToHash := fmt.Sprintf("%v-%v-%v-%v-%v", *userHandle, *userPassword, userXID, clientID, timestampMillis)
 	hmacHash := common.GenHMACHash(messageToHash, clientSecret)
