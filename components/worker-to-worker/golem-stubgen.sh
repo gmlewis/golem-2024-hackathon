@@ -1,4 +1,5 @@
 #!/bin/bash -e
-golem-cli stubgen initialize-workspace \
-    --targets user \
-    --callers user-manager
+golem-cli stubgen generate \
+    --source-wit-root user \
+    --dest-crate-root user-stub \
+    "$@"
