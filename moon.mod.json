@@ -1,7 +1,7 @@
 {
   "name": "gmlewis/golem-2024-hackathon",
   "deps": {
-    "gmlewis/base64": "0.3.0",
-    "gmlewis/spin-moonbit-sdk": "0.33.0"
+    "gmlewis/base64": "0.4.0",
+    "gmlewis/spin-moonbit-sdk": "0.34.0"
   }
 }
