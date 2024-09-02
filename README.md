@@ -1,7 +1,24 @@
-# golem-2024-hackathon
+# golem-2024-hackathon - ARCHIVED
 
 This is my entry to the Golem 2024 Hackathon contest.
 For details, see: https://www.golem.cloud/post/golem-1-0-hackathon-happens-on-august-31st-2024
+
+## Retrospective & Key Learnings
+
+This entry won 2nd place in the Hackathon which was a lot of fun.
+
+Many thanks go to the other contestants and to the Golem team for their
+help on Discord during the event.
+
+John De Goes pointed out that this design has the flaw that API communication
+to the individual `user` workers all gets forwarded through the `user-manager`
+worker, and I totally agree. It turns out that I wasn't aware that API endpoints
+were able to talk to individual workers without setting them up before-hand so
+I thought this was a technical limitation of the platform, but in reality it
+is indeed possible, which is fantastic.
+
+I'm archiving this repo to preserve its state, but look forward to learning
+a lot more about Golem and building new fun projects on it in the future.
 
 ## API Endpoints
 
