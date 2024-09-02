@@ -17,8 +17,17 @@ were able to talk to individual workers without setting them up before-hand so
 I thought this was a technical limitation of the platform, but in reality it
 is indeed possible, which is fantastic.
 
+I chose to use the [MoonBit] programming language for this Hackathon because
+I'm enjoying learning it a great deal. It turns out that this was a significant
+handicap for this Hackthon not only because it isn't an officially-supported
+language, but also because worker-to-worker communication was a requirement
+and the only support Golem currently has for worker-to-worker communication
+using RPC is written in Rust.
+
 I'm archiving this repo to preserve its state, but look forward to learning
 a lot more about Golem and building new fun projects on it in the future.
+
+[MoonBit]: https://moonbitlang.com/
 
 ## API Endpoints
 
